@@ -2,10 +2,10 @@
 
 **한국어** · [English](README.en.md) · [日本語](README.ja.md)
 
-Codex CLI 하단에 컨텍스트·5시간·주간 사용량을 막대와 정확한 퍼센트로 표시합니다. 정상 구간은 연보라색, 60% 이상은 노란색, 85% 이상은 빨간색입니다.
+Codex CLI 하단에 컨텍스트·5시간·주간 사용량을 막대와 정확한 퍼센트로 표시합니다. 5시간 및 주간 제한에는 현지 시간 기준의 정확한 초기화 날짜와 시간도 표시합니다. 정상 구간은 연보라색, 60% 이상은 노란색, 85% 이상은 빨간색입니다.
 
 ```text
-gpt-5.6-sol low · 컨텍스트 ██░░░░░░░░ 18% · 사용량 █░░░░░░░░░ 7% (초기화까지 3h 42m) · 주간 █████░░░░░ 49% (초기화까지 2d 23h)
+gpt-5.6-sol low · 컨텍스트 ██░░░░░░░░ 18% · 사용량 █░░░░░░░░░ 7% (초기화 2026-08-16 17:42) · 주간 █████░░░░░ 49% (초기화 2026-08-23 20:14)
 ```
 
 ## 설치
@@ -13,7 +13,7 @@ gpt-5.6-sol low · 컨텍스트 ██░░░░░░░░ 18% · 사용량 
 현재 Codex CLI에 다음 문장을 요청합니다.
 
 ```text
-https://github.com/LLL-toolkit/codex-usage-statusline 를 현재 컴퓨터에 설치하고 검증까지 완료해줘.
+https://github.com/alexsears/codex-usage-statusline 를 현재 컴퓨터에 설치하고 검증까지 완료해줘.
 저장소에 포함된 운영체제용 설치기를 사용하고 표시 언어는 한국어로 설정해줘.
 ```
 
@@ -26,7 +26,7 @@ https://github.com/LLL-toolkit/codex-usage-statusline 를 현재 컴퓨터에 �
 Apple Silicon macOS:
 
 ```sh
-git clone https://github.com/LLL-toolkit/codex-usage-statusline.git
+git clone https://github.com/alexsears/codex-usage-statusline.git
 cd codex-usage-statusline
 ./install.sh --language ko
 ```
@@ -34,7 +34,7 @@ cd codex-usage-statusline
 Windows x64:
 
 ```powershell
-git clone https://github.com/LLL-toolkit/codex-usage-statusline.git
+git clone https://github.com/alexsears/codex-usage-statusline.git
 cd codex-usage-statusline
 powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -Language ko
 ```
@@ -43,7 +43,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -Language ko
 
 ## 호환성
 
-- Codex CLI **0.144.1**
+- Codex CLI **0.147.0**
 - Windows x64 및 Apple Silicon macOS 지원
 - Intel Mac은 지원하지 않음
 

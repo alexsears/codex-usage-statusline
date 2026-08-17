@@ -4,11 +4,11 @@ set -eu
 umask 077
 
 SCRIPT_DIR=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd -P)
-ProjectVersion='0.3.0'
-SupportedCodexVersion='0.144.1'
-ReleaseTag='v0.3.0'
+ProjectVersion='0.4.0'
+SupportedCodexVersion='0.147.0'
+ReleaseTag='v0.4.0'
 TargetTriple='aarch64-apple-darwin'
-Repository='LLL-toolkit/codex-usage-statusline'
+Repository='alexsears/codex-usage-statusline'
 StatusLineOverride="tui.status_line=['model-with-reasoning','context-used','five-hour-limit','weekly-limit']"
 
 LANGUAGE=ko

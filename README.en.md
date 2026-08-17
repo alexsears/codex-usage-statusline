@@ -2,10 +2,10 @@
 
 [한국어](README.md) · **English** · [日本語](README.ja.md)
 
-Adds Context, five-hour Usage, and Weekly usage bars with exact percentages to the Codex CLI footer. Normal usage is lavender, 60% and above is yellow, and 85% and above is red.
+Adds Context, five-hour Usage, and Weekly usage bars with exact percentages to the Codex CLI footer. Five-hour and weekly limits include their exact local reset date and time. Normal usage is lavender, 60% and above is yellow, and 85% and above is red.
 
 ```text
-gpt-5.6-sol low · Context ██░░░░░░░░ 18% · Usage █░░░░░░░░░ 7% (resets in 3h 42m) · Weekly █████░░░░░ 49% (resets in 2d 23h)
+gpt-5.6-sol low · Context ██░░░░░░░░ 18% · Usage █░░░░░░░░░ 7% (resets 2026-08-16 17:42) · Weekly █████░░░░░ 49% (resets 2026-08-23 20:14)
 ```
 
 ## Install
@@ -13,7 +13,7 @@ gpt-5.6-sol low · Context ██░░░░░░░░ 18% · Usage █░░
 Ask your current Codex CLI:
 
 ```text
-Install and verify https://github.com/LLL-toolkit/codex-usage-statusline on this computer.
+Install and verify https://github.com/alexsears/codex-usage-statusline on this computer.
 Use the installer included for this operating system and set the display language to English.
 ```
 
@@ -26,7 +26,7 @@ To run the repository installer directly:
 Apple Silicon macOS:
 
 ```sh
-git clone https://github.com/LLL-toolkit/codex-usage-statusline.git
+git clone https://github.com/alexsears/codex-usage-statusline.git
 cd codex-usage-statusline
 ./install.sh --language en
 ```
@@ -34,7 +34,7 @@ cd codex-usage-statusline
 Windows x64:
 
 ```powershell
-git clone https://github.com/LLL-toolkit/codex-usage-statusline.git
+git clone https://github.com/alexsears/codex-usage-statusline.git
 cd codex-usage-statusline
 powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -Language en
 ```
@@ -43,7 +43,7 @@ Korean `ko` is the default. English `en` and Japanese `ja` are also available.
 
 ## Compatibility
 
-- Codex CLI **0.144.1**
+- Codex CLI **0.147.0**
 - Windows x64 and Apple Silicon macOS supported
 - Intel Macs are not supported
 

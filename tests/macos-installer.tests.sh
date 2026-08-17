@@ -4,8 +4,8 @@ set -eu
 umask 077
 
 ROOT=$(CDPATH='' cd -- "$(dirname -- "$0")/.." && pwd -P)
-PROJECT_VERSION=0.3.0
-CODEX_VERSION=0.144.1
+PROJECT_VERSION=0.4.0
+CODEX_VERSION=0.147.0
 TARGET=aarch64-apple-darwin
 SYSTEM_PATH=/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin
 TEMP_ROOT=$(mktemp -d "${TMPDIR:-/tmp}/codex-statusline-tests.XXXXXX")

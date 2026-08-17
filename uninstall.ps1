@@ -3,8 +3,8 @@ param([string]$StateRoot = (Join-Path $env:LOCALAPPDATA 'codex-usage-statusline'
 
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
-$ProjectVersion = '0.3.0'
-$SupportedCodexVersion = '0.144.1'
+$ProjectVersion = '0.4.0'
+$SupportedCodexVersion = '0.147.0'
 
 function Get-Sha256([string]$Path) {
     (Get-FileHash -Algorithm SHA256 -LiteralPath $Path).Hash.ToLowerInvariant()
