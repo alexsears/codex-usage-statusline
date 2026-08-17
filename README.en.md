@@ -2,10 +2,10 @@
 
 [한국어](README.md) · **English** · [日本語](README.ja.md)
 
-Adds Context, five-hour Usage, and Weekly usage bars with exact percentages to the Codex CLI footer. Five-hour and weekly limits include their exact local reset date and time. Normal usage is lavender, 60% and above is yellow, and 85% and above is red.
+Adds exact local reset dates and times to the existing five-hour and Weekly items in the Codex CLI footer. Percentages remain headroom remaining, and the rest of the configured footer is preserved. Normal usage is lavender, 40% remaining and below is yellow, and 15% remaining and below is red.
 
 ```text
-gpt-5.6-sol low · Context ██░░░░░░░░ 18% · Usage █░░░░░░░░░ 7% (resets 2026-08-16 17:42) · Weekly █████░░░░░ 49% (resets 2026-08-23 20:14)
+gpt-5.6-sol low · Context 82% left · Usage 93% left (resets 2026-08-16 17:42) · Weekly 51% left (resets 2026-08-23 20:14)
 ```
 
 ## Install
@@ -70,13 +70,9 @@ codex --version
 codex
 ```
 
-After the first request, confirm that the footer contains `Context`, `Usage`, and `Weekly` bars and that reset values use local `YYYY-MM-DD HH:MM` timestamps. Five-hour and weekly items can remain hidden until the first usage response arrives.
+After the first request, confirm that the footer contains the configured five-hour and `Weekly` items and that reset values use local `YYYY-MM-DD HH:MM` timestamps. These items can remain hidden until the first usage response arrives.
 
-The installer and uninstaller never create or edit `~/.codex/config.toml`. The launcher supplies `CODEX_USAGE_STATUSLINE_LANGUAGE` and this per-invocation override:
-
-```text
--c tui.status_line=['model-with-reasoning','context-used','five-hour-limit','weekly-limit']
-```
+The installer and uninstaller never create or edit `~/.codex/config.toml`. The launcher supplies only `CODEX_USAGE_STATUSLINE_LANGUAGE`; it preserves the configured status-line items and their order. Include `five-hour-limit` and `weekly-limit` in `[tui].status_line` to show the reset timestamps.
 
 ## Uninstall
 

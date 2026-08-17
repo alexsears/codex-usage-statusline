@@ -15,9 +15,9 @@ $ProjectVersion = '0.4.0'
 $SupportedCodexVersion = '0.147.0'
 $TargetTriple = 'x86_64-pc-windows-msvc'
 $ExpectedUpstreamCommit = 'be6e8eac029b183056b7e4402879f15d2c85f61b'
-$ExpectedPatchSha256 = 'b45fb8b10b85dfd4f045793f05349ceb4da5e122f1935edb9e97a342a424bf9e'
+$ExpectedPatchSha256 = '45427814a54f22fbaffadde1df8f2db4d7e2ac0aeae7f96ab440802bc0837dc8'
 $Repository = 'alexsears/codex-usage-statusline'
-$StatusLineOverride = "tui.status_line=['model-with-reasoning','context-used','five-hour-limit','weekly-limit']"
+$StatusLineOverride = 'preserve-user-config'
 $ReleaseSigningPublicKeySha256 = 'c004c4a7baf1f3dedfcfca3346db7d93b37a148d0455b01a56fb5859f31488d0'
 $ReleaseSigningSignatureSize = 384
 $ReleaseSigningModulusBase64 = @(
@@ -136,7 +136,7 @@ function Get-CodexLauncherContent([string]$RelativeBinary, [string]$DisplayLangu
 @echo off
 setlocal
 set "CODEX_USAGE_STATUSLINE_LANGUAGE=$DisplayLanguage"
-"%~dp0$RelativeBinary" -c "$script:StatusLineOverride" %*
+"%~dp0$RelativeBinary" %*
 "@
     $content -replace "`n", "`r`n"
 }
