@@ -70,7 +70,7 @@ codex --version
 codex
 ```
 
-After the first request, confirm that the footer contains `Context`, `Usage`, and `Weekly` bars. Five-hour and weekly items can remain hidden until the first usage response arrives.
+After the first request, confirm that the footer contains `Context`, `Usage`, and `Weekly` bars and that reset values use local `YYYY-MM-DD HH:MM` timestamps. Five-hour and weekly items can remain hidden until the first usage response arrives.
 
 The installer and uninstaller never create or edit `~/.codex/config.toml`. The launcher supplies `CODEX_USAGE_STATUSLINE_LANGUAGE` and this per-invocation override:
 
