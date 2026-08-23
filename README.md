@@ -2,10 +2,10 @@
 
 **한국어** · [English](README.en.md) · [日本語](README.ja.md)
 
-Codex CLI 하단에 컨텍스트·5시간·주간 사용량을 막대와 정확한 퍼센트로 표시합니다. 정상 구간은 연보라색, 60% 이상은 노란색, 85% 이상은 빨간색입니다.
+Codex CLI 하단의 기존 5시간 및 주간 항목에 현지 시간 기준의 정확한 초기화 날짜와 시간을 추가합니다. 퍼센트는 남은 여유분을 계속 의미하며 설정된 나머지 하단 항목도 그대로 유지합니다. 남은 비율이 40% 이하이면 노란색, 15% 이하이면 빨간색입니다.
 
 ```text
-gpt-5.6-sol low · 컨텍스트 ██░░░░░░░░ 18% · 사용량 █░░░░░░░░░ 7% (초기화까지 3h 42m) · 주간 █████░░░░░ 49% (초기화까지 2d 23h)
+gpt-5.6-sol low · 컨텍스트 82% left · 사용량 93% left (초기화 2026-08-16 17:42) · 주간 51% left (초기화 2026-08-23 20:14)
 ```
 
 ## 설치
@@ -13,7 +13,7 @@ gpt-5.6-sol low · 컨텍스트 ██░░░░░░░░ 18% · 사용량 
 현재 Codex CLI에 다음 문장을 요청합니다.
 
 ```text
-https://github.com/LLL-toolkit/codex-usage-statusline 를 현재 컴퓨터에 설치하고 검증까지 완료해줘.
+https://github.com/alexsears/codex-usage-statusline 를 현재 컴퓨터에 설치하고 검증까지 완료해줘.
 저장소에 포함된 운영체제용 설치기를 사용하고 표시 언어는 한국어로 설정해줘.
 ```
 
@@ -26,7 +26,7 @@ https://github.com/LLL-toolkit/codex-usage-statusline 를 현재 컴퓨터에 �
 Apple Silicon macOS:
 
 ```sh
-git clone https://github.com/LLL-toolkit/codex-usage-statusline.git
+git clone https://github.com/alexsears/codex-usage-statusline.git
 cd codex-usage-statusline
 ./install.sh --language ko
 ```
@@ -34,7 +34,7 @@ cd codex-usage-statusline
 Windows x64:
 
 ```powershell
-git clone https://github.com/LLL-toolkit/codex-usage-statusline.git
+git clone https://github.com/alexsears/codex-usage-statusline.git
 cd codex-usage-statusline
 powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -Language ko
 ```
@@ -43,7 +43,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -Language ko
 
 ## 호환성
 
-- Codex CLI **0.144.1**
+- Codex CLI **0.147.0**
 - Windows x64 및 Apple Silicon macOS 지원
 - Intel Mac은 지원하지 않음
 
@@ -70,13 +70,9 @@ codex --version
 codex
 ```
 
-첫 요청 후 하단에 `컨텍스트`, `사용량`, `주간` 막대가 나타나는지 확인합니다. 사용량 데이터가 아직 도착하지 않았다면 5시간·주간 항목은 첫 응답 이후 나타날 수 있습니다.
+첫 요청 후 설정된 5시간 및 `주간` 항목에 현지 `YYYY-MM-DD HH:MM` 초기화 타임스탬프가 나타나는지 확인합니다. 사용량 데이터가 아직 도착하지 않았다면 해당 항목은 첫 응답 이후 나타날 수 있습니다.
 
-설치기와 제거기는 `~/.codex/config.toml`을 생성하거나 수정하지 않습니다. 실행기가 호출마다 `CODEX_USAGE_STATUSLINE_LANGUAGE`와 다음 일회성 설정을 전달합니다.
-
-```text
--c tui.status_line=['model-with-reasoning','context-used','five-hour-limit','weekly-limit']
-```
+설치기와 제거기는 `~/.codex/config.toml`을 생성하거나 수정하지 않습니다. 실행기는 `CODEX_USAGE_STATUSLINE_LANGUAGE`만 전달하고, 설정된 상태줄 항목과 순서를 그대로 유지합니다. 초기화 타임스탬프를 표시하려면 `[tui].status_line`에 `five-hour-limit`와 `weekly-limit`를 포함합니다.
 
 ## 제거
 

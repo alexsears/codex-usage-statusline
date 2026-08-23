@@ -4,12 +4,12 @@ set -eu
 umask 077
 
 SCRIPT_DIR=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd -P)
-ProjectVersion='0.3.0'
-SupportedCodexVersion='0.144.1'
-ReleaseTag='v0.3.0'
+ProjectVersion='0.4.0'
+SupportedCodexVersion='0.147.0'
+ReleaseTag='v0.4.0'
 TargetTriple='aarch64-apple-darwin'
-Repository='LLL-toolkit/codex-usage-statusline'
-StatusLineOverride="tui.status_line=['model-with-reasoning','context-used','five-hour-limit','weekly-limit']"
+Repository='alexsears/codex-usage-statusline'
+StatusLineOverride='preserve-user-config'
 
 LANGUAGE=ko
 STATE_ROOT=${CODEX_USAGE_STATUSLINE_STATE_ROOT:-"$HOME/Library/Application Support/codex-usage-statusline"}
@@ -368,7 +368,7 @@ mv "$STAGED_BUNDLE" "$VERSION_ROOT"
 VERSION_COMMITTED=1
 CUSTOM_BINARY=$VERSION_ROOT/$BINARY_RELATIVE
 
-python3 - "$STAGED_LAUNCHER_DIRECTORY/codex" "$CUSTOM_BINARY" "$LAUNCHER_DIRECTORY" "$LANGUAGE" "$StatusLineOverride" <<'PY'
+python3 - "$STAGED_LAUNCHER_DIRECTORY/codex" "$CUSTOM_BINARY" "$LAUNCHER_DIRECTORY" "$LANGUAGE" <<'PY'
 import os
 import shlex
 import sys
@@ -378,14 +378,13 @@ launcher = Path(sys.argv[1])
 binary = Path(sys.argv[2])
 installed_launcher_dir = Path(sys.argv[3])
 language = sys.argv[4]
-override = sys.argv[5]
 relative = os.path.relpath(binary, installed_launcher_dir)
 content = (
     "#!/bin/sh\n"
     "set -eu\n"
     "launcher_dir=$(CDPATH='' cd -- \"$(dirname -- \"$0\")\" && pwd -P)\n"
     f"export CODEX_USAGE_STATUSLINE_LANGUAGE={shlex.quote(language)}\n"
-    f"exec \"$launcher_dir\"/{shlex.quote(relative)} -c {shlex.quote(override)} \"$@\"\n"
+    f"exec \"$launcher_dir\"/{shlex.quote(relative)} \"$@\"\n"
 )
 launcher.write_text(content, encoding="utf-8")
 launcher.chmod(0o755)

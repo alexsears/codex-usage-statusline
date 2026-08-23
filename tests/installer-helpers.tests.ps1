@@ -14,7 +14,7 @@ function ConvertFrom-CodePoints([int[]]$CodePoints) {
     -join ($CodePoints | ForEach-Object { [char]$_ })
 }
 
-Assert-Equal $StatusLineOverride "tui.status_line=['model-with-reasoning','context-used','five-hour-limit','weekly-limit']" 'The launcher config override changed unexpectedly.'
+Assert-Equal $StatusLineOverride 'preserve-user-config' 'The launcher status-line behavior changed unexpectedly.'
 
 $path = Add-PathEntry 'C:\official;C:\tools;C:\custom' 'C:\custom\'
 Assert-Equal $path 'C:\custom\;C:\official;C:\tools' 'PATH insertion did not prepend and deduplicate the launcher.'
@@ -74,7 +74,7 @@ try {
     Write-Utf8NoBom $mockLauncher (Get-CodexLauncherContent '..\versions\mock\codex.cmd' 'ko')
     $launcherOutput = (& $mockLauncher --version | Out-String)
     Assert-Contains $launcherOutput 'LANG=ko'
-    Assert-Contains $launcherOutput $StatusLineOverride
+    if ($launcherOutput.Contains('tui.status_line')) { throw 'The launcher unexpectedly replaced the user status line.' }
     Assert-Contains $launcherOutput '--version'
 
     Add-Type -AssemblyName System.IO.Compression.FileSystem

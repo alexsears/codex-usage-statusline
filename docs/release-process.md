@@ -65,13 +65,13 @@ Developer ID와 공증 자격이 없으므로 macOS metadata는 `developerId: fa
 5. 고정 커밋에 `release-lock.json`의 태그를 생성하고 push합니다.
 
 ```sh
-git tag -a v0.3.0 -m "codex-usage-statusline 0.3.0"
-git push origin v0.3.0
+git tag -a v0.4.0 -m "codex-usage-statusline 0.4.0"
+git push origin v0.4.0
 ```
 
 태그 워크플로는 같은 검증과 빌드를 다시 수행하고 prerelease 상태의 draft GitHub Release를 만듭니다. 모든 파일을 업로드한 뒤 다시 다운로드해 전체 자산 집합, RSA 서명, 태그 커밋, SHA-256을 검증해야만 prerelease로 공개합니다. 이미 공개된 동일 태그 릴리스가 있으면 파일을 교체하지 않고 기존 자산이 현재 태그 커밋에 결속됐는지 검증한 뒤 종료합니다.
 
-production Release URL 설치·제거 게이트와 문서 기록이 끝난 뒤 `gh release edit v0.3.0 --prerelease=false --latest`로 정식 릴리스로 승격합니다. 이 승격 전에는 README와 GitHub Release 모두 Apple Silicon 지원 완료를 표시하지 않습니다.
+production Release URL 설치·제거 게이트와 문서 기록이 끝난 뒤 `gh release edit v0.4.0 --prerelease=false --latest`로 정식 릴리스로 승격합니다. 이 승격 전에는 README와 GitHub Release 모두 Apple Silicon 지원 완료를 표시하지 않습니다.
 
 ## 릴리스 자산
 

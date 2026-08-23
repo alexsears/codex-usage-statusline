@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.4.0 - 2026-08-16
+
+### Changed
+
+- Port the shared status-line patch to Codex CLI 0.147.0.
+- Show exact local reset dates and times in five-hour and weekly footer items, using `YYYY-MM-DD HH:MM`.
+- Preserve the user's configured footer items and remaining-headroom percentage semantics.
+- Point the release installers and documentation at the maintained `alexsears/codex-usage-statusline` fork.
+
+### Fixed
+
+- Refresh the upstream workspace package versions in `Cargo.lock` so Codex 0.147.0 builds reproducibly with `--locked`.
+
 ## 0.3.0 - 2026-07-10
 
 ### Added

@@ -3,7 +3,7 @@ param(
     [ValidateSet('ko', 'en', 'ja')]
     [string]$Language = 'ko',
     [string]$StateRoot = (Join-Path $env:LOCALAPPDATA 'codex-usage-statusline'),
-    [string]$ReleaseTag = 'v0.3.0',
+    [string]$ReleaseTag = 'v0.4.0',
     [string]$ReleaseBaseUrl,
     [switch]$DryRun
 )
@@ -11,13 +11,13 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 $Utf8NoBom = New-Object System.Text.UTF8Encoding($false)
-$ProjectVersion = '0.3.0'
-$SupportedCodexVersion = '0.144.1'
+$ProjectVersion = '0.4.0'
+$SupportedCodexVersion = '0.147.0'
 $TargetTriple = 'x86_64-pc-windows-msvc'
-$ExpectedUpstreamCommit = '44918ea10c0f99151c6710411b4322c2f5c96bea'
-$ExpectedPatchSha256 = '02d74d7c01f34c72e0c1e244db334ce09fde9dd01b12f56b6741f001ceed9d53'
-$Repository = 'LLL-toolkit/codex-usage-statusline'
-$StatusLineOverride = "tui.status_line=['model-with-reasoning','context-used','five-hour-limit','weekly-limit']"
+$ExpectedUpstreamCommit = 'be6e8eac029b183056b7e4402879f15d2c85f61b'
+$ExpectedPatchSha256 = '45427814a54f22fbaffadde1df8f2db4d7e2ac0aeae7f96ab440802bc0837dc8'
+$Repository = 'alexsears/codex-usage-statusline'
+$StatusLineOverride = 'preserve-user-config'
 $ReleaseSigningPublicKeySha256 = 'c004c4a7baf1f3dedfcfca3346db7d93b37a148d0455b01a56fb5859f31488d0'
 $ReleaseSigningSignatureSize = 384
 $ReleaseSigningModulusBase64 = @(
@@ -136,7 +136,7 @@ function Get-CodexLauncherContent([string]$RelativeBinary, [string]$DisplayLangu
 @echo off
 setlocal
 set "CODEX_USAGE_STATUSLINE_LANGUAGE=$DisplayLanguage"
-"%~dp0$RelativeBinary" -c "$script:StatusLineOverride" %*
+"%~dp0$RelativeBinary" %*
 "@
     $content -replace "`n", "`r`n"
 }

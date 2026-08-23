@@ -2,10 +2,10 @@
 
 [한국어](README.md) · **English** · [日本語](README.ja.md)
 
-Adds Context, five-hour Usage, and Weekly usage bars with exact percentages to the Codex CLI footer. Normal usage is lavender, 60% and above is yellow, and 85% and above is red.
+Adds exact local reset dates and times to the existing five-hour and Weekly items in the Codex CLI footer. Percentages remain headroom remaining, and the rest of the configured footer is preserved. Normal usage is lavender, 40% remaining and below is yellow, and 15% remaining and below is red.
 
 ```text
-gpt-5.6-sol low · Context ██░░░░░░░░ 18% · Usage █░░░░░░░░░ 7% (resets in 3h 42m) · Weekly █████░░░░░ 49% (resets in 2d 23h)
+gpt-5.6-sol low · Context 82% left · Usage 93% left (resets 2026-08-16 17:42) · Weekly 51% left (resets 2026-08-23 20:14)
 ```
 
 ## Install
@@ -13,7 +13,7 @@ gpt-5.6-sol low · Context ██░░░░░░░░ 18% · Usage █░░
 Ask your current Codex CLI:
 
 ```text
-Install and verify https://github.com/LLL-toolkit/codex-usage-statusline on this computer.
+Install and verify https://github.com/alexsears/codex-usage-statusline on this computer.
 Use the installer included for this operating system and set the display language to English.
 ```
 
@@ -26,7 +26,7 @@ To run the repository installer directly:
 Apple Silicon macOS:
 
 ```sh
-git clone https://github.com/LLL-toolkit/codex-usage-statusline.git
+git clone https://github.com/alexsears/codex-usage-statusline.git
 cd codex-usage-statusline
 ./install.sh --language en
 ```
@@ -34,7 +34,7 @@ cd codex-usage-statusline
 Windows x64:
 
 ```powershell
-git clone https://github.com/LLL-toolkit/codex-usage-statusline.git
+git clone https://github.com/alexsears/codex-usage-statusline.git
 cd codex-usage-statusline
 powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -Language en
 ```
@@ -43,7 +43,7 @@ Korean `ko` is the default. English `en` and Japanese `ja` are also available.
 
 ## Compatibility
 
-- Codex CLI **0.144.1**
+- Codex CLI **0.147.0**
 - Windows x64 and Apple Silicon macOS supported
 - Intel Macs are not supported
 
@@ -70,13 +70,9 @@ codex --version
 codex
 ```
 
-After the first request, confirm that the footer contains `Context`, `Usage`, and `Weekly` bars. Five-hour and weekly items can remain hidden until the first usage response arrives.
+After the first request, confirm that the footer contains the configured five-hour and `Weekly` items and that reset values use local `YYYY-MM-DD HH:MM` timestamps. These items can remain hidden until the first usage response arrives.
 
-The installer and uninstaller never create or edit `~/.codex/config.toml`. The launcher supplies `CODEX_USAGE_STATUSLINE_LANGUAGE` and this per-invocation override:
-
-```text
--c tui.status_line=['model-with-reasoning','context-used','five-hour-limit','weekly-limit']
-```
+The installer and uninstaller never create or edit `~/.codex/config.toml`. The launcher supplies only `CODEX_USAGE_STATUSLINE_LANGUAGE`; it preserves the configured status-line items and their order. Include `five-hour-limit` and `weekly-limit` in `[tui].status_line` to show the reset timestamps.
 
 ## Uninstall
 

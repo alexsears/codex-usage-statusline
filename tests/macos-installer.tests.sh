@@ -4,8 +4,8 @@ set -eu
 umask 077
 
 ROOT=$(CDPATH='' cd -- "$(dirname -- "$0")/.." && pwd -P)
-PROJECT_VERSION=0.3.0
-CODEX_VERSION=0.144.1
+PROJECT_VERSION=0.4.0
+CODEX_VERSION=0.147.0
 TARGET=aarch64-apple-darwin
 SYSTEM_PATH=/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin
 TEMP_ROOT=$(mktemp -d "${TMPDIR:-/tmp}/codex-statusline-tests.XXXXXX")
@@ -476,7 +476,9 @@ assert_equal "$(grep -c '^# >>> codex-usage-statusline >>>$' "$HOME_ROOT/.bash_p
 
 launcher_output=$("$STATE_ROOT/bin/codex" --probe 'argument with spaces')
 printf '%s\n' "$launcher_output" | grep -F 'CUSTOM LANG=ko' >/dev/null || fail 'Launcher language was not propagated.'
-printf '%s\n' "$launcher_output" | grep -F "CUSTOM ARG=tui.status_line=['model-with-reasoning','context-used','five-hour-limit','weekly-limit']" >/dev/null || fail 'Status-line override was not propagated.'
+if printf '%s\n' "$launcher_output" | grep -F 'CUSTOM ARG=tui.status_line=' >/dev/null; then
+    fail 'The launcher unexpectedly replaced the user status line.'
+fi
 printf '%s\n' "$launcher_output" | grep -F 'CUSTOM ARG=argument with spaces' >/dev/null || fail 'Launcher argument quoting failed.'
 
 zsh_command=$(HOME="$HOME_ROOT" ZDOTDIR="$MAIN_ZDOTDIR" PATH="$NPM_ROOT/bin:$SYSTEM_PATH" /bin/zsh -lic 'command -v codex')
