@@ -36,3 +36,10 @@ The uninstallers remove only installer-owned PATH activation and files. Installa
 - Production installers independently resolve the remote release tag's peeled commit and require it to match the signed `customizationCommit`. macOS removal verifies the complete installed bundle inventory and preserves any payload containing additions or modifications.
 - Run `python3 scripts/verify_release_lock.py`, `python3 tests/release_assets_tests.py`, the platform installer tests, and `git diff --check` before release.
 - Do not mark Apple Silicon as supported until the release-candidate and production-URL flows in `docs/macos-validation.md` have passed on Apple Silicon hardware.
+
+## Shared operating policy
+
+Read `C:\Users\asear\.codex\AGENTS.md` for shared scope, authorization,
+verification and memory policy. For tracked work under C:\code, read
+`C:\code\AGENT-WORKFLOW.md` and `C:\code\COLLAB.md`. Ordinary questions
+do not require a task, branch or outcome card.
