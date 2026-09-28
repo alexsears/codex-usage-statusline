@@ -10,7 +10,7 @@
   "rustToolchain": "1.95.0",
   "patch": {
     "path": "patches/codex-0.156.1.patch",
-    "sha256": "d7ba569c252b392fac1e8b56c4d41142de97048ebc5ad06fe6e965249fe54c1d"
+    "sha256": "776da60e15e42eb88a22936a8f16765548cd166bec2a5584162d1f72057c67ae"
   },
   "releaseSigning": {
     "algorithm": "rsa-pkcs1v15-sha256",

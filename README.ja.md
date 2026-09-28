@@ -1,5 +1,7 @@
 # codex-usage-statusline
 
+> 0.5.0 is a development candidate for Codex 0.156.1. A signed public release is not published yet. Apple Silicon device validation for this version is pending.
+
 [한국어](README.md) · [English](README.en.md) · **日本語**
 
 Codex CLI フッターの既存の5時間・週間項目に、ローカル時刻で正確なリセット日時を追加します。使用率は残りの余裕を引き続き表し、設定済みの他のフッター項目も保持します。残り40%以下は黄色、15%以下は赤色です。

@@ -1456,10 +1456,24 @@ index 2ac794d2f0a21d7d68314b6d71893e2c02dcb9cc..4d736a1ec6be9e08f535f397d21ebd93
 -"  gpt-5.4 xhigh fast · Context 0% used · /tmp/project                           "
 +"  gpt-5.4 xhigh fast · 컨텍스트 ░░░░░░░░░░ 0% · /tmp/project                  " Hidden by multi-width symbols: [(24, " "), (26, " "), (28, " "), (30, " ")]
 diff --git a/codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__status_line_setup_popup_rate_limits.snap b/codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__status_line_setup_popup_rate_limits.snap
-index 6b6cd080bde46b25e49072ecb41c652a4ea2c21a..00e4f9a034de35667196d28315763103b0996fd8 100644
+index 6b6cd080bde46b25e49072ecb41c652a4ea2c21a..2e9a16621ab14f8fb77bb6ead54285d0fc1777e5 100644
 --- a/codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__status_line_setup_popup_rate_limits.snap
 +++ b/codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__status_line_setup_popup_rate_limits.snap
-@@ -16,5 +16,5 @@ expression: status_line_popup_snapshot(&mut chat)
+@@ -1,5 +1,6 @@
+ ---
+ source: tui/src/chatwidget/tests/status_surface_previews.rs
++assertion_line: 440
+ expression: status_line_popup_snapshot(&mut chat)
+ ---
+   Configure Status Line
+@@ -10,11 +11,11 @@ expression: status_line_popup_snapshot(&mut chat)
+ › [x] Use theme colors      Apply colors from the active /theme
+   ───────────────────────
+   [x] monthly-limit         Remaining usage on the monthly usage limit (omitted when unavailable)
+-  [x] weekly-limit          Remaining usage on the weekly usage limit (omitted when unavailable)
++  [x] weekly-limit          Remaining usage on the secondary usage limit (omitted when unavailable)
+   [ ] model                 Current model name
+   [ ] model-with-reasoning  Current model name with reasoning level
    [ ] reasoning             Current reasoning level
    [ ] current-dir           Current working directory
  ↓
