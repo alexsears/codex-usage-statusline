@@ -52,7 +52,7 @@ Korean `ko` is the default. English `en` and Japanese `ja` are also available.
 
 | Platform | Release build | Real-device validation |
 |---|---:|---:|
-| Windows x64 | Automated | Pending new-version verification |
+| Windows x64 | Local development build verified | Live footer verified |
 | Apple Silicon macOS | Automated | Pending new-version verification |
 
 Codex's internal TUI is not a stable plugin API, so the version must match exactly. The installer activates nothing if the version, asset, hash, or target architecture differs.
