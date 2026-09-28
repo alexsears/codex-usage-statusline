@@ -1,3 +1,9 @@
+# 0.5.0
+
+- Update the reset-date footer patch and pinned installers for Codex CLI 0.156.1.
+- Preserve new upstream thread colors, contrast handling, and status-line picker controls.
+- Reset timestamps continue to use the local timezone and server-provided reset time.
+
 # Changelog
 
 ## 0.4.0 - 2026-08-16

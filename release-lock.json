@@ -1,16 +1,16 @@
 {
   "schemaVersion": 1,
-  "projectVersion": "0.4.0",
-  "releaseTag": "v0.4.0",
-  "codexVersion": "0.147.0",
-  "upstreamTag": "rust-v0.147.0",
-  "upstreamTagObject": "3ed6f04f6bf8b7c46299d1cb1ff99c74ce21a51d",
-  "upstreamCommit": "be6e8eac029b183056b7e4402879f15d2c85f61b",
-  "upstreamTree": "3828c818254d4c756585f5b59fe46b6fa3634765",
+  "projectVersion": "0.5.0",
+  "releaseTag": "v0.5.0",
+  "codexVersion": "0.156.1",
+  "upstreamTag": "rust-v0.156.1",
+  "upstreamTagObject": "81e8e29b2956dfe9b092c63953a9ed282781e77c",
+  "upstreamCommit": "b412ff32c417f855c2b2d1581b77058eed87c84b",
+  "upstreamTree": "0a0b0bf9acf2f45e9239e7a52ef79f7702aa5799",
   "rustToolchain": "1.95.0",
   "patch": {
-    "path": "patches/codex-0.147.0.patch",
-    "sha256": "45427814a54f22fbaffadde1df8f2db4d7e2ac0aeae7f96ab440802bc0837dc8"
+    "path": "patches/codex-0.156.1.patch",
+    "sha256": "d7ba569c252b392fac1e8b56c4d41142de97048ebc5ad06fe6e965249fe54c1d"
   },
   "releaseSigning": {
     "algorithm": "rsa-pkcs1v15-sha256",

@@ -43,7 +43,7 @@ Korean `ko` is the default. English `en` and Japanese `ja` are also available.
 
 ## Compatibility
 
-- Codex CLI **0.147.0**
+- Codex CLI **0.156.1**
 - Windows x64 and Apple Silicon macOS supported
 - Intel Macs are not supported
 

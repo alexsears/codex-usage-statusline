@@ -222,7 +222,7 @@ class ReleaseArchiveTests(unittest.TestCase):
         extracted = self.root / "extracted"
         selected_dist = self.root / "selected-dist"
         selected_dist.mkdir()
-        base = "codex-usage-statusline-0.4.0-codex-0.147.0-aarch64-apple-darwin"
+        base = "codex-usage-statusline-0.5.0-codex-0.156.1-aarch64-apple-darwin"
         for name in (
             f"{base}.tar.gz",
             f"{base}.tar.gz.sha256",
@@ -312,7 +312,7 @@ class MacHelperTests(unittest.TestCase):
                 {
                     "installationKind": "npm",
                     "target": "aarch64-apple-darwin",
-                    "version": "0.147.0",
+                    "version": "0.156.1",
                     "commandPath": "/official/codex",
                     "binaryPath": "/official/bundle/bin/codex",
                     "bundleRoot": "/official/bundle",
@@ -322,7 +322,7 @@ class MacHelperTests(unittest.TestCase):
             encoding="utf-8",
         )
         manifest_path = state / "active-install.json"
-        custom_bundle = state / "versions" / "0.4.0-codex-0.147.0"
+        custom_bundle = state / "versions" / "0.5.0-codex-0.156.1"
         custom_binary = custom_bundle / "bin" / "codex"
         custom_binary.parent.mkdir(parents=True)
         custom_binary.write_bytes(b"custom")
@@ -334,10 +334,10 @@ class MacHelperTests(unittest.TestCase):
                 argparse.Namespace(
                     output=manifest_path,
                     official_info=official,
-                    codex_version="0.147.0",
+                    codex_version="0.156.1",
                     customization_commit="a" * 40,
-                    project_version="0.4.0",
-                    release_tag="v0.4.0",
+                    project_version="0.5.0",
+                    release_tag="v0.5.0",
                     installed_at="2026-07-10T00:00:00Z",
                     language="ko",
                     asset_name="asset.tar.gz",
@@ -354,7 +354,7 @@ class MacHelperTests(unittest.TestCase):
                 )
             )
         manifest = macos_manifest.load(manifest_path)
-        macos_manifest.validate_manifest(manifest, state, "0.4.0", "0.147.0", home)
+        macos_manifest.validate_manifest(manifest, state, "0.5.0", "0.156.1", home)
         by_shell = {record["shell"]: record["path"] for record in manifest["profiles"]}
         self.assertEqual(by_shell["zsh"], str(zdotdir / ".zprofile"))
         self.assertEqual(by_shell["bash"], str(home / ".bash_profile"))
@@ -369,7 +369,7 @@ class MacHelperTests(unittest.TestCase):
             )
         manifest["profiles"][1]["shell"] = "zsh"
         with self.assertRaises(SystemExit):
-            macos_manifest.validate_manifest(manifest, state, "0.4.0", "0.147.0", home)
+            macos_manifest.validate_manifest(manifest, state, "0.5.0", "0.156.1", home)
 
 
 if __name__ == "__main__":

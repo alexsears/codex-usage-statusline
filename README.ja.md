@@ -43,7 +43,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\install.ps1 -Language ja
 
 ## 互換性
 
-- Codex CLI **0.147.0**
+- Codex CLI **0.156.1**
 - Windows x64 と Apple Silicon macOS に対応
 - Intel Mac は非対応
 
