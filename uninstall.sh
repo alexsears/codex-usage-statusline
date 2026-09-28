@@ -4,8 +4,8 @@ set -eu
 umask 077
 
 SCRIPT_DIR=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd -P)
-ProjectVersion='0.4.0'
-SupportedCodexVersion='0.147.0'
+ProjectVersion='0.5.0'
+SupportedCodexVersion='0.156.1'
 STATE_ROOT=${CODEX_USAGE_STATUSLINE_STATE_ROOT:-"$HOME/Library/Application Support/codex-usage-statusline"}
 
 usage() {

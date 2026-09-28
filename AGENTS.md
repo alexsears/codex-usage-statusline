@@ -13,7 +13,7 @@ Use the verified prebuilt release and the installer committed in this repository
 5. Report the result. The official Codex installation remains untouched; a new terminal is required for the side-by-side launcher to become first on PATH.
 6. From a new terminal, verify `command -v codex` where available, `codex --version`, and the footer after the first request.
 
-The Apple Silicon installer supports official standalone, Homebrew, and npm installations for the current user. Intel Macs are not supported. If the installed Codex version is not exactly 0.147.0, stop and report the mismatch because the Rust patch is version-locked.
+The Apple Silicon installer supports official standalone, Homebrew, and npm installations for the current user. Intel Macs are not supported. If the installed Codex version is not exactly 0.156.1, stop and report the mismatch because the Rust patch is version-locked.
 
 Prebuilt installation has no Rust build step. For release maintenance, an agent may bootstrap the pinned Rust and platform toolchains and complete the build automatically.
 

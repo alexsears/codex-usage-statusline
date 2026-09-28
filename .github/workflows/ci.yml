@@ -30,9 +30,9 @@ jobs:
         run: |
           set -euo pipefail
           git clone --filter=blob:none --no-checkout https://github.com/openai/codex.git "$RUNNER_TEMP/codex"
-          git -C "$RUNNER_TEMP/codex" fetch --depth 1 origin be6e8eac029b183056b7e4402879f15d2c85f61b
+          git -C "$RUNNER_TEMP/codex" fetch --depth 1 origin b412ff32c417f855c2b2d1581b77058eed87c84b
           git -C "$RUNNER_TEMP/codex" checkout --detach FETCH_HEAD
-          git -C "$RUNNER_TEMP/codex" apply --check "$GITHUB_WORKSPACE/patches/codex-0.147.0.patch"
+          git -C "$RUNNER_TEMP/codex" apply --check "$GITHUB_WORKSPACE/patches/codex-0.156.1.patch"
 
   windows-installer:
     runs-on: windows-2022

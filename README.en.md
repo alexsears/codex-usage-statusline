@@ -1,5 +1,7 @@
 # codex-usage-statusline
 
+> 0.5.0 is a development candidate for Codex 0.156.1. A signed public release is not published yet. Apple Silicon device validation for this version is pending.
+
 [한국어](README.md) · **English** · [日本語](README.ja.md)
 
 Adds exact local reset dates and times to the existing five-hour and Weekly items in the Codex CLI footer. Percentages remain headroom remaining, and the rest of the configured footer is preserved. Normal usage is lavender, 40% remaining and below is yellow, and 15% remaining and below is red.
@@ -43,14 +45,15 @@ Korean `ko` is the default. English `en` and Japanese `ja` are also available.
 
 ## Compatibility
 
-- Codex CLI **0.147.0**
-- Windows x64 and Apple Silicon macOS supported
+- Codex CLI **0.156.1**
+- Windows x64 and Apple Silicon macOS build targets
+- Apple Silicon device validation for 0.156.1 is pending; the earlier validation applies to 0.147.0.
 - Intel Macs are not supported
 
 | Platform | Release build | Real-device validation |
 |---|---:|---:|
-| Windows x64 | Automated | Supported |
-| Apple Silicon macOS | Automated | Supported |
+| Windows x64 | Local development build verified | Live footer verified |
+| Apple Silicon macOS | Automated | Pending new-version verification |
 
 Codex's internal TUI is not a stable plugin API, so the version must match exactly. The installer activates nothing if the version, asset, hash, or target architecture differs.
 

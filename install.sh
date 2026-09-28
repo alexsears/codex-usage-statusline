@@ -4,9 +4,9 @@ set -eu
 umask 077
 
 SCRIPT_DIR=$(CDPATH='' cd -- "$(dirname -- "$0")" && pwd -P)
-ProjectVersion='0.4.0'
-SupportedCodexVersion='0.147.0'
-ReleaseTag='v0.4.0'
+ProjectVersion='0.5.0'
+SupportedCodexVersion='0.156.1'
+ReleaseTag='v0.5.0'
 TargetTriple='aarch64-apple-darwin'
 Repository='alexsears/codex-usage-statusline'
 StatusLineOverride='preserve-user-config'

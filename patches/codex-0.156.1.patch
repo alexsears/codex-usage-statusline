@@ -1,0 +1,1910 @@
+diff --git a/codex-rs/Cargo.lock b/codex-rs/Cargo.lock
+index 52bb0e35781c9ffe0032a80400117b7e34fef742..cc9ad063eaeafa89ae874fbe5a2724d50ec7f9ec 100644
+--- a/codex-rs/Cargo.lock
++++ b/codex-rs/Cargo.lock
+@@ -416,7 +416,7 @@ checksum = "2a4385e2e34eb35d6b3efe798b9eb88096925d87726c0798709bf56d9ed84af3"
+ 
+ [[package]]
+ name = "app_test_support"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "base64 0.22.1",
+@@ -2050,7 +2050,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-agent-extension"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "codex-core",
+@@ -2062,7 +2062,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-agent-graph-store"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-protocol",
+  "codex-state",
+@@ -2077,7 +2077,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-agent-identity"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "base64 0.22.1",
+@@ -2097,7 +2097,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-agent-message-board-extension"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "base64 0.22.1",
+  "caseless",
+@@ -2120,7 +2120,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-agent-roles"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-config",
+  "codex-file-system",
+@@ -2133,7 +2133,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-analytics"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-app-server-protocol",
+  "codex-git-utils",
+@@ -2154,7 +2154,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-ansi-escape"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "ansi-to-tui",
+  "ratatui",
+@@ -2163,7 +2163,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-api"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "assert_matches",
+@@ -2201,7 +2201,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-app-server"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "app_test_support",
+@@ -2309,7 +2309,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-app-server-client"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-app-server",
+  "codex-app-server-protocol",
+@@ -2336,7 +2336,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-app-server-daemon"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "blake3",
+@@ -2361,7 +2361,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-app-server-protocol"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "codex-app-server-protocol-noop-macros",
+@@ -2395,11 +2395,11 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-app-server-protocol-noop-macros"
+-version = "0.0.0"
++version = "0.156.1"
+ 
+ [[package]]
+ name = "codex-app-server-test-client"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "clap",
+@@ -2421,7 +2421,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-app-server-transport"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "axum",
+@@ -2465,7 +2465,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-apply-patch"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "assert_cmd",
+@@ -2485,7 +2485,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-arg0"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "codex-apply-patch",
+@@ -2507,7 +2507,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-async-utils"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "pretty_assertions",
+  "rand 0.9.3",
+@@ -2517,7 +2517,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-attachment-store"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "pretty_assertions",
+  "serde",
+@@ -2527,7 +2527,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-aws-auth"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "aws-config",
+  "aws-credential-types",
+@@ -2542,7 +2542,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-backend-client"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "codex-api",
+@@ -2562,7 +2562,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-backend-openapi-models"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "serde",
+  "serde_json",
+@@ -2571,7 +2571,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-build-info"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-install-context",
+  "pretty_assertions",
+@@ -2584,7 +2584,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-bwrap"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "cc",
+  "libc",
+@@ -2593,7 +2593,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-chatgpt"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "clap",
+@@ -2615,7 +2615,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-cli"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "app_test_support",
+@@ -2711,7 +2711,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-client"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-http-client",
+  "eventsource-stream",
+@@ -2724,7 +2724,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-cloud-config"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "base64 0.22.1",
+  "chrono",
+@@ -2750,7 +2750,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-cloud-tasks"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "chrono",
+@@ -2783,7 +2783,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-cloud-tasks-client"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "chrono",
+@@ -2798,7 +2798,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-cloud-tasks-mock-client"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "chrono",
+  "codex-cloud-tasks-client",
+@@ -2807,7 +2807,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-code-mode"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-code-mode-protocol",
+  "codex-http-client",
+@@ -2830,7 +2830,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-code-mode-host"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "axum",
+@@ -2858,7 +2858,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-code-mode-protocol"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-protocol",
+  "glob",
+@@ -2876,7 +2876,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-code-mode-runtime"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "base64 0.22.1",
+  "codex-code-mode-protocol",
+@@ -2894,11 +2894,11 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-collaboration-mode-templates"
+-version = "0.0.0"
++version = "0.156.1"
+ 
+ [[package]]
+ name = "codex-config"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "base64 0.22.1",
+@@ -2948,7 +2948,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-config-schema"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "clap",
+@@ -2957,7 +2957,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-connectors"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "arc-swap",
+@@ -2979,7 +2979,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-connectors-extension"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-connectors",
+  "codex-core-plugins",
+@@ -2993,7 +2993,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-context-fragments"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-protocol",
+  "codex-utils-string",
+@@ -3003,7 +3003,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-core"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "arc-swap",
+@@ -3140,7 +3140,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-core-api"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-analytics",
+  "codex-app-server-protocol",
+@@ -3163,7 +3163,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-core-plugins"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "chrono",
+@@ -3218,7 +3218,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-diagnostics"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "libc",
+  "pretty_assertions",
+@@ -3226,7 +3226,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-exec"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "assert_cmd",
+@@ -3278,7 +3278,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-exec-server"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "arc-swap",
+@@ -3339,7 +3339,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-exec-server-protocol"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "base64 0.22.1",
+  "codex-file-system",
+@@ -3355,7 +3355,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-exec-server-test-support"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "codex-exec-server",
+@@ -3370,7 +3370,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-execpolicy"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "clap",
+@@ -3388,7 +3388,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-experimental-api-macros"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "proc-macro2",
+  "quote",
+@@ -3397,7 +3397,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-extension-api"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-config",
+  "codex-context-fragments",
+@@ -3416,7 +3416,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-extension-items"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-utils-absolute-path",
+  "pretty_assertions",
+@@ -3428,7 +3428,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-external-agent-migration"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "chrono",
+  "codex-analytics",
+@@ -3458,7 +3458,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-features"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-network-proxy",
+  "codex-otel",
+@@ -3472,7 +3472,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-feedback"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "bytes",
+@@ -3496,7 +3496,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-file-search"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "clap",
+@@ -3512,7 +3512,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-file-system"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "bytes",
+  "codex-protocol",
+@@ -3524,7 +3524,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-file-watcher"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "notify",
+  "pretty_assertions",
+@@ -3535,7 +3535,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-git-attribution"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-backend-client",
+  "codex-extension-api",
+@@ -3548,7 +3548,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-git-utils"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "chrono",
+@@ -3574,7 +3574,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-goal-extension"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "chrono",
+@@ -3599,7 +3599,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-guardian-context"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-context-fragments",
+  "codex-history",
+@@ -3610,7 +3610,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-guardian-reviewer"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "codex-analytics",
+@@ -3635,7 +3635,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-guardian-v2"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "codex-analytics",
+@@ -3668,7 +3668,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-history"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "codex-protocol",
+@@ -3680,7 +3680,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-history-notes-extension"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-analytics",
+  "codex-api",
+@@ -3705,7 +3705,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-home"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-extension-api",
+  "codex-utils-absolute-path",
+@@ -3717,7 +3717,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-hooks"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "async-channel",
+@@ -3743,7 +3743,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-http-client"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "bytes",
+  "codex-utils-cargo-bin",
+@@ -3776,7 +3776,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-image-generation-extension"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "base64 0.22.1",
+  "codex-api",
+@@ -3803,7 +3803,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-install-context"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-utils-absolute-path",
+  "codex-utils-home-dir",
+@@ -3816,7 +3816,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-keyring-store"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "keyring",
+  "tracing",
+@@ -3824,7 +3824,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-linux-sandbox"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "clap",
+  "codex-core",
+@@ -3852,7 +3852,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-lmstudio"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-core",
+  "codex-http-client",
+@@ -3866,7 +3866,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-login"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "base64 0.22.1",
+@@ -3909,7 +3909,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-mcp"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "arc-swap",
+@@ -3949,7 +3949,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-mcp-extension"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "axum",
+@@ -3982,7 +3982,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-memories-extension"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-core",
+  "codex-extension-api",
+@@ -4004,7 +4004,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-memories-read"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-protocol",
+  "codex-shell-command",
+@@ -4014,7 +4014,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-memories-write"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "chrono",
+@@ -4051,7 +4051,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-mermaid"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "insta",
+  "pretty_assertions",
+@@ -4060,7 +4060,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-message-history"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-config",
+  "memchr",
+@@ -4074,7 +4074,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-model-provider"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "base64 0.22.1",
+  "chrono",
+@@ -4106,7 +4106,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-model-provider-info"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-api",
+  "codex-protocol",
+@@ -4124,7 +4124,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-models-manager"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "chrono",
+  "codex-http-client",
+@@ -4143,7 +4143,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-mxc-sandbox"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "appcontainer_common",
+@@ -4165,7 +4165,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-network-proxy"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "base64 0.22.1",
+@@ -4213,7 +4213,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-ollama"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "assert_matches",
+  "async-stream",
+@@ -4233,7 +4233,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-otel"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "chrono",
+  "codex-api",
+@@ -4266,7 +4266,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-otel-trace-websocket"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "axum",
+@@ -4277,7 +4277,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-plugin"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-config",
+  "codex-protocol",
+@@ -4291,7 +4291,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-process-hardening"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "libc",
+  "pretty_assertions",
+@@ -4299,7 +4299,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-prompts"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "codex-collaboration-mode-templates",
+@@ -4316,7 +4316,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-protocol"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "chardetng",
+@@ -4360,7 +4360,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-queue-extension"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "codex-core",
+@@ -4381,7 +4381,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-realtime-webrtc"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "codex-build-info",
+@@ -4399,7 +4399,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-response-debug-context"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "base64 0.22.1",
+  "codex-api",
+@@ -4410,7 +4410,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-responses-api-proxy"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "clap",
+@@ -4427,7 +4427,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-rmcp-client"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "axum",
+@@ -4475,7 +4475,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-rollout"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "chrono",
+@@ -4502,7 +4502,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-rollout-trace"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "codex-code-mode",
+@@ -4518,7 +4518,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-sandboxing"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "codex-mxc-sandbox",
+@@ -4545,7 +4545,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-secrets"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "age",
+  "anyhow",
+@@ -4566,7 +4566,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-shell-command"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "base64 0.22.1",
+@@ -4589,7 +4589,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-shell-escalation"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "clap",
+@@ -4609,7 +4609,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-skills"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-protocol",
+  "codex-shell-command",
+@@ -4626,7 +4626,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-skills-extension"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "assert_matches",
+  "codex-analytics",
+@@ -4663,7 +4663,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-state"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "chrono",
+@@ -4687,7 +4687,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-stdio-to-uds"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "codex-uds",
+@@ -4699,7 +4699,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-tcp-tunnel"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "bytes",
+@@ -4720,7 +4720,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-terminal-detection"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "pretty_assertions",
+  "tracing",
+@@ -4728,7 +4728,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-test-binary-support"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-arg0",
+  "tempfile",
+@@ -4736,7 +4736,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-thread-manager-sample"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "clap",
+@@ -4747,7 +4747,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-thread-store"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "chrono",
+  "codex-app-server-protocol",
+@@ -4777,7 +4777,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-tools"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "bitflags 2.13.1",
+  "codex-code-mode",
+@@ -4802,7 +4802,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-tui"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "app_test_support",
+@@ -4928,7 +4928,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-uds"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "async-io",
+  "libc",
+@@ -4942,7 +4942,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-user-verification"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "base64 0.22.1",
+  "core-foundation 0.10.1",
+@@ -4962,7 +4962,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-utils-absolute-path"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "dirs",
+  "dunce",
+@@ -4976,14 +4976,14 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-utils-approval-presets"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-protocol",
+ ]
+ 
+ [[package]]
+ name = "codex-utils-audio"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "base64 0.22.1",
+  "codex-protocol",
+@@ -4997,7 +4997,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-utils-cache"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "lru",
+  "sha1 0.10.6",
+@@ -5006,7 +5006,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-utils-cargo-bin"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "assert_cmd",
+  "runfiles",
+@@ -5015,7 +5015,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-utils-cli"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "clap",
+  "codex-protocol",
+@@ -5027,15 +5027,15 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-utils-elapsed"
+-version = "0.0.0"
++version = "0.156.1"
+ 
+ [[package]]
+ name = "codex-utils-fuzzy-match"
+-version = "0.0.0"
++version = "0.156.1"
+ 
+ [[package]]
+ name = "codex-utils-git-discovery"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-git-utils",
+  "codex-utils-absolute-path",
+@@ -5048,7 +5048,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-utils-home-dir"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-utils-absolute-path",
+  "dirs",
+@@ -5058,7 +5058,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-utils-image"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "base64 0.22.1",
+  "codex-utils-cache",
+@@ -5071,7 +5071,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-utils-json-to-toml"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "pretty_assertions",
+  "serde_json",
+@@ -5080,7 +5080,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-utils-oss"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-core",
+  "codex-lmstudio",
+@@ -5090,7 +5090,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-utils-output-truncation"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-protocol",
+  "codex-utils-string",
+@@ -5099,7 +5099,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-utils-path"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-utils-absolute-path",
+  "dunce",
+@@ -5110,7 +5110,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-utils-path-uri"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "base64 0.22.1",
+  "codex-utils-absolute-path",
+@@ -5126,7 +5126,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-utils-plugins"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-exec-server",
+  "codex-exec-server-protocol",
+@@ -5140,7 +5140,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-utils-pty"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "filedescriptor",
+@@ -5157,7 +5157,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-utils-readiness"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "assert_matches",
+  "thiserror 2.0.18",
+@@ -5167,7 +5167,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-utils-redacted-string"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "schemars 0.8.22",
+  "serde",
+@@ -5175,14 +5175,14 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-utils-rustls-provider"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "rustls",
+ ]
+ 
+ [[package]]
+ name = "codex-utils-sandbox-summary"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-protocol",
+  "codex-utils-absolute-path",
+@@ -5192,7 +5192,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-utils-sleep-inhibitor"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "core-foundation 0.9.4",
+  "libc",
+@@ -5202,14 +5202,14 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-utils-stream-parser"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "pretty_assertions",
+ ]
+ 
+ [[package]]
+ name = "codex-utils-string"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "pretty_assertions",
+  "regex-lite",
+@@ -5219,14 +5219,14 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-utils-template"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "pretty_assertions",
+ ]
+ 
+ [[package]]
+ name = "codex-v8-poc"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "pretty_assertions",
+  "v8",
+@@ -5234,7 +5234,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-voice-host"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "codex-install-context",
+@@ -5261,7 +5261,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-web-search-extension"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-api",
+  "codex-core",
+@@ -5282,7 +5282,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-websocket-client"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-http-client",
+  "codex-utils-rustls-provider",
+@@ -5298,7 +5298,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-windows-sandbox"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "base64 0.22.1",
+@@ -5324,7 +5324,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-windows-sandbox-service"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "codex-cloud-config",
+@@ -5341,7 +5341,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-workload-identity"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "codex-http-client",
+  "pretty_assertions",
+@@ -5356,7 +5356,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "codex-worktree"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "codex-git-utils",
+@@ -5596,7 +5596,7 @@ dependencies = [
+ 
+ [[package]]
+ name = "core_test_support"
+-version = "0.0.0"
++version = "0.156.1"
+ dependencies = [
+  "anyhow",
+  "assert_cmd",
+diff --git a/codex-rs/tui/src/bottom_pane/status_line_style.rs b/codex-rs/tui/src/bottom_pane/status_line_style.rs
+index 8c44ce425b099a3f8b9f28b7435b974f7e6db37a..9a686d95fe8b0aa10c15b1314557ae41686b27f1 100644
+--- a/codex-rs/tui/src/bottom_pane/status_line_style.rs
++++ b/codex-rs/tui/src/bottom_pane/status_line_style.rs
+@@ -125,10 +125,12 @@ where
+         {
+             Style::default().fg(thread_color(thread_id))
+         } else if use_theme_colors {
+-            let accent = StatusLineAccent::for_item(item);
+-            soften_status_line_style(
+-                theme_style_for_accent(accent).unwrap_or_else(|| accent.fallback_style()),
+-            )
++            usage_status_style(item, &text).unwrap_or_else(|| {
++                let accent = StatusLineAccent::for_item(item);
++                soften_status_line_style(
++                    theme_style_for_accent(accent).unwrap_or_else(|| accent.fallback_style()),
++                )
++            })
+         } else {
+             secondary_text_style()
+         };
+@@ -151,6 +153,37 @@ where
+     (!spans.is_empty()).then(|| Line::from(spans))
+ }
+ 
++fn usage_status_style(item: StatusLineItem, text: &str) -> Option<Style> {
++    if !matches!(
++        item,
++        StatusLineItem::ContextUsed | StatusLineItem::FiveHourLimit | StatusLineItem::WeeklyLimit
++    ) {
++        return None;
++    }
++
++    let percent = text
++        .split_whitespace()
++        .find_map(|part| part.strip_suffix('%'))?
++        .parse::<f64>()
++        .ok()?;
++    let percent_used = if matches!(
++        item,
++        StatusLineItem::FiveHourLimit | StatusLineItem::WeeklyLimit
++    ) {
++        100.0 - percent
++    } else {
++        percent
++    };
++    let color = if percent_used >= 85.0 {
++        Color::Red
++    } else if percent_used >= 60.0 {
++        Color::Yellow
++    } else {
++        Color::Rgb(196, 181, 253)
++    };
++    Some(Style::default().fg(color))
++}
++
+ fn soften_status_line_style(mut style: Style) -> Style {
+     if let Some(fg) = style.fg {
+         style.fg = Some(soften_status_line_color(fg));
+@@ -259,7 +292,7 @@ mod tests {
+         assert_eq!(line.spans[0].style.fg, Some(Color::Red));
+         assert!(!line.spans[0].style.add_modifier.contains(Modifier::DIM));
+         assert_eq!(line.spans[1].style, secondary_text_style());
+-        assert_eq!(line.spans[2].style.fg, Some(Color::Green));
++        assert_eq!(line.spans[2].style.fg, Some(Color::Rgb(196, 181, 253)));
+         assert!(!line.spans[2].style.add_modifier.contains(Modifier::DIM));
+     }
+ 
+diff --git a/codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__status_line_model_with_reasoning_fast_footer.snap b/codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__status_line_model_with_reasoning_fast_footer.snap
+index 2ac794d2f0a21d7d68314b6d71893e2c02dcb9cc..4d736a1ec6be9e08f535f397d21ebd93109bdb54 100644
+--- a/codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__status_line_model_with_reasoning_fast_footer.snap
++++ b/codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__status_line_model_with_reasoning_fast_footer.snap
+@@ -6,4 +6,4 @@ expression: normalized_backend_snapshot(terminal.backend())
+ "                                                                                "
+ "› Ask Codex to do anything                                                      "
+ "                                                                                "
+-"  gpt-5.4 xhigh fast · Context 0% used · /tmp/project                           "
++"  gpt-5.4 xhigh fast · 컨텍스트 ░░░░░░░░░░ 0% · /tmp/project                  " Hidden by multi-width symbols: [(24, " "), (26, " "), (28, " "), (30, " ")]
+diff --git a/codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__status_line_setup_popup_rate_limits.snap b/codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__status_line_setup_popup_rate_limits.snap
+index 6b6cd080bde46b25e49072ecb41c652a4ea2c21a..2e9a16621ab14f8fb77bb6ead54285d0fc1777e5 100644
+--- a/codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__status_line_setup_popup_rate_limits.snap
++++ b/codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__status_line_setup_popup_rate_limits.snap
+@@ -1,5 +1,6 @@
+ ---
+ source: tui/src/chatwidget/tests/status_surface_previews.rs
++assertion_line: 440
+ expression: status_line_popup_snapshot(&mut chat)
+ ---
+   Configure Status Line
+@@ -10,11 +11,11 @@ expression: status_line_popup_snapshot(&mut chat)
+ › [x] Use theme colors      Apply colors from the active /theme
+   ───────────────────────
+   [x] monthly-limit         Remaining usage on the monthly usage limit (omitted when unavailable)
+-  [x] weekly-limit          Remaining usage on the weekly usage limit (omitted when unavailable)
++  [x] weekly-limit          Remaining usage on the secondary usage limit (omitted when unavailable)
+   [ ] model                 Current model name
+   [ ] model-with-reasoning  Current model name with reasoning level
+   [ ] reasoning             Current reasoning level
+   [ ] current-dir           Current working directory
+ ↓
+-  monthly 65% left · weekly 50% left
++  monthly 65% left · 주 간  50% left
+   space toggle · ←/→ reorder · enter save · esc cancel
+diff --git a/codex-rs/tui/src/chatwidget/status_controls.rs b/codex-rs/tui/src/chatwidget/status_controls.rs
+index 6dc0ab9077d95c4c3b4df05065a509f7be34c54b..389b6bd9d6785a9203106a905f1813fe12a41159 100644
+--- a/codex-rs/tui/src/chatwidget/status_controls.rs
++++ b/codex-rs/tui/src/chatwidget/status_controls.rs
+@@ -448,7 +448,17 @@ impl ChatWidget {
+     ) -> Option<String> {
+         let window = window?;
+         let remaining = (100.0f64 - window.used_percent).clamp(0.0f64, 100.0f64);
+-        Some(format!("{label} {remaining:.0}% left"))
++        let reset = window
++            .status_line_reset_at
++            .as_deref()
++            .map(|resets_at| {
++                format!(
++                    " ({} {resets_at})",
++                    status_line_label(StatusLineLabel::Reset)
++                )
++            })
++            .unwrap_or_default();
++        Some(format!("{label} {remaining:.0}% left{reset}"))
+     }
+ 
+     pub(super) fn status_line_reasoning_effort_label(
+@@ -460,3 +470,42 @@ impl ChatWidget {
+         }
+     }
+ }
++
++pub(super) fn status_line_progress_bar(percent: f64) -> String {
++    const SEGMENTS: usize = 10;
++    let filled = ((percent.clamp(0.0, 100.0) / 100.0) * SEGMENTS as f64).round() as usize;
++    format!("{}{}", "█".repeat(filled), "░".repeat(SEGMENTS - filled))
++}
++
++#[derive(Clone, Copy, Debug, Eq, PartialEq)]
++pub(super) enum StatusLineLabel {
++    Context,
++    Usage,
++    Weekly,
++    Reset,
++}
++
++pub(super) fn status_line_label(label: StatusLineLabel) -> &'static str {
++    let language = std::env::var("CODEX_USAGE_STATUSLINE_LANGUAGE").ok();
++    status_line_label_for_language(language.as_deref(), label)
++}
++
++pub(super) fn status_line_label_for_language(
++    language: Option<&str>,
++    label: StatusLineLabel,
++) -> &'static str {
++    match (language, label) {
++        (Some("en"), StatusLineLabel::Context) => "Context",
++        (Some("en"), StatusLineLabel::Usage) => "Usage",
++        (Some("en"), StatusLineLabel::Weekly) => "Weekly",
++        (Some("en"), StatusLineLabel::Reset) => "resets",
++        (Some("ja"), StatusLineLabel::Context) => "コンテキスト",
++        (Some("ja"), StatusLineLabel::Usage) => "使用量",
++        (Some("ja"), StatusLineLabel::Weekly) => "週間",
++        (Some("ja"), StatusLineLabel::Reset) => "リセット",
++        (_, StatusLineLabel::Context) => "컨텍스트",
++        (_, StatusLineLabel::Usage) => "사용량",
++        (_, StatusLineLabel::Weekly) => "주간",
++        (_, StatusLineLabel::Reset) => "초기화",
++    }
++}
+diff --git a/codex-rs/tui/src/chatwidget/status_surfaces.rs b/codex-rs/tui/src/chatwidget/status_surfaces.rs
+index f84f8758f953bae1ac9de23dfbec029479a68c27..b73f8917fa992c07029d26ab665ad742070b246e 100644
+--- a/codex-rs/tui/src/chatwidget/status_surfaces.rs
++++ b/codex-rs/tui/src/chatwidget/status_surfaces.rs
+@@ -8,6 +8,9 @@ use crate::bottom_pane::status_line_from_segments;
+ use crate::branch_summary;
+ use crate::chatwidget::limit_label_for_window;
+ use crate::chatwidget::rate_limits::get_limits_duration;
++use crate::chatwidget::status_controls::StatusLineLabel;
++use crate::chatwidget::status_controls::status_line_label;
++use crate::chatwidget::status_controls::status_line_progress_bar;
+ use crate::legacy_core::config::Config;
+ use crate::model_catalog::LUNA_RESERVE_MODEL;
+ use crate::status::format_credit_micros;
+@@ -751,15 +754,23 @@ impl ChatWidget {
+             StatusLineItem::ContextRemaining => self
+                 .status_line_context_remaining_percent()
+                 .map(|remaining| format!("Context {remaining}% left")),
+-            StatusLineItem::ContextUsed => self
+-                .status_line_context_used_percent()
+-                .map(|used| format!("Context {used}% used")),
++            StatusLineItem::ContextUsed => self.status_line_context_used_percent().map(|used| {
++                format!(
++                    "{} {} {used}%",
++                    status_line_label(StatusLineLabel::Context),
++                    status_line_progress_bar(used as f64)
++                )
++            }),
+             StatusLineItem::FiveHourLimit => {
+                 let (window, is_secondary) = self
+                     .rate_limit_snapshots_by_limit_id
+                     .get("codex")
+                     .and_then(five_hour_status_window)?;
+-                let label = limit_label_for_window(window.window_minutes, is_secondary);
++                let label = if matches_window_label(window, "5h") {
++                    status_line_label(StatusLineLabel::Usage).to_string()
++                } else {
++                    limit_label_for_window(window.window_minutes, is_secondary)
++                };
+                 self.status_line_limit_display(Some(window), &label)
+             }
+             StatusLineItem::WeeklyLimit => {
+@@ -767,7 +778,11 @@ impl ChatWidget {
+                     .rate_limit_snapshots_by_limit_id
+                     .get("codex")
+                     .and_then(weekly_status_window)?;
+-                let label = limit_label_for_window(window.window_minutes, is_secondary);
++                let label = if matches_window_label(window, "weekly") {
++                    status_line_label(StatusLineLabel::Weekly).to_string()
++                } else {
++                    limit_label_for_window(window.window_minutes, is_secondary)
++                };
+                 self.status_line_limit_display(Some(window), &label)
+             }
+             StatusLineItem::CodexVersion => Some(CODEX_CLI_VERSION.to_string()),
+diff --git a/codex-rs/tui/src/chatwidget/tests/status_and_layout.rs b/codex-rs/tui/src/chatwidget/tests/status_and_layout.rs
+index 1c2308a4d1d88641fec5a46298744c553dccc1e2..0504a2e514c83cffab68019d9603cae11042328e 100644
+--- a/codex-rs/tui/src/chatwidget/tests/status_and_layout.rs
++++ b/codex-rs/tui/src/chatwidget/tests/status_and_layout.rs
+@@ -56,6 +56,49 @@ fn take_workspace_headline_request_id(
+     }
+ }
+ 
++#[test]
++fn status_line_progress_bar_clamps_and_rounds() {
++    use crate::chatwidget::status_controls::status_line_progress_bar;
++
++    assert_eq!(status_line_progress_bar(-1.0), "░░░░░░░░░░");
++    assert_eq!(status_line_progress_bar(4.9), "░░░░░░░░░░");
++    assert_eq!(status_line_progress_bar(5.0), "█░░░░░░░░░");
++    assert_eq!(status_line_progress_bar(49.0), "█████░░░░░");
++    assert_eq!(status_line_progress_bar(95.0), "██████████");
++    assert_eq!(status_line_progress_bar(101.0), "██████████");
++}
++
++#[test]
++fn status_line_labels_support_korean_english_and_japanese() {
++    use crate::chatwidget::status_controls::StatusLineLabel;
++    use crate::chatwidget::status_controls::status_line_label_for_language;
++
++    assert_eq!(
++        status_line_label_for_language(None, StatusLineLabel::Context),
++        "컨텍스트"
++    );
++    assert_eq!(
++        status_line_label_for_language(Some("en"), StatusLineLabel::Usage),
++        "Usage"
++    );
++    assert_eq!(
++        status_line_label_for_language(Some("en"), StatusLineLabel::Reset),
++        "resets"
++    );
++    assert_eq!(
++        status_line_label_for_language(Some("ja"), StatusLineLabel::Weekly),
++        "週間"
++    );
++    assert_eq!(
++        status_line_label_for_language(Some("ja"), StatusLineLabel::Reset),
++        "リセット"
++    );
++    assert_eq!(
++        status_line_label_for_language(Some("fr"), StatusLineLabel::Reset),
++        "초기화"
++    );
++}
++
+ /// Receiving a token usage update without usage clears the context indicator.
+ #[tokio::test]
+ async fn token_count_none_resets_context_indicator() {
+@@ -769,11 +812,51 @@ async fn status_line_legacy_limit_items_prefer_matching_windows() {
+ 
+     assert_eq!(
+         chat.status_line_value_for_item(crate::bottom_pane::StatusLineItem::FiveHourLimit),
+-        Some("5h 60% left".to_string())
++        Some("사용량 60% left".to_string())
++    );
++    assert_eq!(
++        chat.status_line_value_for_item(crate::bottom_pane::StatusLineItem::WeeklyLimit),
++        Some("주간 6% left".to_string())
+     );
++}
++
++#[tokio::test]
++async fn status_line_weekly_limit_includes_exact_local_reset_timestamp() {
++    use crate::chatwidget::status_controls::StatusLineLabel;
++    use crate::chatwidget::status_controls::status_line_label;
++    use chrono::Local;
++    use chrono::TimeZone;
++
++    let (mut chat, _rx, _op_rx) = make_chatwidget_manual(/*model_override*/ None).await;
++    let reset_at = Local
++        .with_ymd_and_hms(2026, 8, 23, 20, 14, 0)
++        .single()
++        .expect("valid local timestamp");
++
++    chat.on_rate_limit_snapshot(Some(RateLimitSnapshot {
++        limit_id: None,
++        limit_name: None,
++        normal_model_slug: None,
++        primary: Some(RateLimitWindow {
++            used_percent: 49,
++            window_duration_mins: Some(7 * 24 * 60),
++            resets_at: Some(reset_at.timestamp()),
++        }),
++        secondary: None,
++        credits: None,
++        individual_limit: None,
++        plan_type: None,
++        spend_control_reached: None,
++        rate_limit_reached_type: None,
++    }));
++
+     assert_eq!(
+         chat.status_line_value_for_item(crate::bottom_pane::StatusLineItem::WeeklyLimit),
+-        Some("weekly 6% left".to_string())
++        Some(format!(
++            "{} 51% left ({} 2026-08-23 20:14)",
++            status_line_label(StatusLineLabel::Weekly),
++            status_line_label(StatusLineLabel::Reset)
++        ))
+     );
+ }
+ 
+@@ -808,7 +891,7 @@ async fn status_line_shows_secondary_non_weekly_when_primary_is_weekly() {
+     );
+     assert_eq!(
+         chat.status_line_value_for_item(crate::bottom_pane::StatusLineItem::WeeklyLimit),
+-        Some("weekly 6% left".to_string())
++        Some("주간 6% left".to_string())
+     );
+ }
+ 
+@@ -839,7 +922,7 @@ async fn status_line_five_hour_item_omits_weekly_only_limit() {
+     );
+     assert_eq!(
+         chat.status_line_value_for_item(crate::bottom_pane::StatusLineItem::WeeklyLimit),
+-        Some("weekly 91% left".to_string())
++        Some("주간 91% left".to_string())
+     );
+ }
+ 
+@@ -2948,7 +3031,10 @@ async fn status_line_context_used_renders_labeled_percent() {
+ 
+     chat.refresh_status_line();
+ 
+-    assert_eq!(status_line_text(&chat), Some("Context 0% used".to_string()));
++    assert_eq!(
++        status_line_text(&chat),
++        Some("컨텍스트 ░░░░░░░░░░ 0%".to_string())
++    );
+     assert!(
+         drain_insert_history(&mut rx).is_empty(),
+         "context-used should remain a valid status line item"
+@@ -2981,7 +3067,10 @@ async fn status_line_legacy_context_usage_renders_context_used_percent() {
+ 
+     chat.refresh_status_line();
+ 
+-    assert_eq!(status_line_text(&chat), Some("Context 0% used".to_string()));
++    assert_eq!(
++        status_line_text(&chat),
++        Some("컨텍스트 ░░░░░░░░░░ 0%".to_string())
++    );
+     assert!(
+         drain_insert_history(&mut rx).is_empty(),
+         "legacy context-usage should remain a valid status line item"
+@@ -4009,7 +4098,9 @@ async fn status_line_model_with_reasoning_includes_fast_for_fast_capable_models(
+ 
+     assert_eq!(
+         status_line_text(&chat),
+-        Some(format!("gpt-5.4 xhigh fast · Context 0% used · {test_cwd}"))
++        Some(format!(
++            "gpt-5.4 xhigh fast · 컨텍스트 ░░░░░░░░░░ 0% · {test_cwd}"
++        ))
+     );
+ 
+     chat.set_model("gpt-5.2");
+@@ -4017,7 +4108,9 @@ async fn status_line_model_with_reasoning_includes_fast_for_fast_capable_models(
+ 
+     assert_eq!(
+         status_line_text(&chat),
+-        Some(format!("gpt-5.2 xhigh · Context 0% used · {test_cwd}"))
++        Some(format!(
++            "gpt-5.2 xhigh · 컨텍스트 ░░░░░░░░░░ 0% · {test_cwd}"
++        ))
+     );
+ }
+ 
+diff --git a/codex-rs/tui/src/status/rate_limits.rs b/codex-rs/tui/src/status/rate_limits.rs
+index 2099647d7b07e993c2950f2e5204486eb26c3538..f5c8fe46b0fab12f985537aaa080762dd446961a 100644
+--- a/codex-rs/tui/src/status/rate_limits.rs
++++ b/codex-rs/tui/src/status/rate_limits.rs
+@@ -71,6 +71,8 @@ pub(crate) struct RateLimitWindowDisplay {
+     pub used_percent: f64,
+     /// Human-readable local reset time.
+     pub resets_at: Option<String>,
++    /// Exact local reset date and time for space-constrained surfaces.
++    pub status_line_reset_at: Option<String>,
+     /// Window length in minutes when provided by the server.
+     pub window_minutes: Option<i64>,
+ }
+@@ -81,16 +83,24 @@ impl RateLimitWindowDisplay {
+             .resets_at
+             .and_then(|seconds| DateTime::<Utc>::from_timestamp(seconds, 0))
+             .map(|dt| dt.with_timezone(&Local));
+-        let resets_at = resets_at_utc.map(|dt| format_reset_timestamp(dt, captured_at));
++        let resets_at = resets_at_utc
++            .as_ref()
++            .map(|dt| format_reset_timestamp(dt.to_owned(), captured_at.to_owned()));
++        let status_line_reset_at = resets_at_utc.as_ref().map(format_status_line_reset_at);
+ 
+         Self {
+             used_percent: f64::from(window.used_percent),
+             resets_at,
++            status_line_reset_at,
+             window_minutes: window.window_duration_mins,
+         }
+     }
+ }
+ 
++fn format_status_line_reset_at(reset_at: &DateTime<Local>) -> String {
++    reset_at.format("%Y-%m-%d %H:%M").to_string()
++}
++
+ #[derive(Debug, Clone)]
+ pub(crate) struct RateLimitSnapshotDisplay {
+     /// Canonical limit identifier (for example: `codex` or `codex_other`).
+@@ -440,17 +450,55 @@ mod tests {
+     use super::RateLimitWindowDisplay;
+     use super::StatusRateLimitData;
+     use super::compose_rate_limit_data_many;
++    use super::format_status_line_reset_at;
+     use chrono::Local;
++    use chrono::TimeZone;
++    use codex_app_server_protocol::RateLimitWindow;
+     use pretty_assertions::assert_eq;
+ 
+     fn window(used_percent: f64) -> RateLimitWindowDisplay {
+         RateLimitWindowDisplay {
+             used_percent,
+             resets_at: Some("soon".to_string()),
++            status_line_reset_at: Some("2026-08-23 20:14".to_string()),
+             window_minutes: Some(300),
+         }
+     }
+ 
++    #[test]
++    fn status_line_reset_timestamp_has_local_date_and_time() {
++        let reset_at = Local
++            .with_ymd_and_hms(2026, 8, 23, 20, 14, 0)
++            .single()
++            .expect("valid local timestamp");
++
++        assert_eq!(format_status_line_reset_at(&reset_at), "2026-08-23 20:14");
++    }
++
++    #[test]
++    fn status_line_window_exposes_exact_local_reset_timestamp() {
++        let captured_at = Local
++            .with_ymd_and_hms(2026, 8, 16, 12, 0, 0)
++            .single()
++            .expect("valid local timestamp");
++        let reset_at = Local
++            .with_ymd_and_hms(2026, 8, 23, 20, 14, 0)
++            .single()
++            .expect("valid local timestamp");
++        let window = RateLimitWindow {
++            used_percent: 49,
++            window_duration_mins: Some(7 * 24 * 60),
++            resets_at: Some(reset_at.timestamp()),
++        };
++
++        let display = RateLimitWindowDisplay::from_window(&window, captured_at);
++
++        assert_eq!(
++            display.status_line_reset_at.as_deref(),
++            Some("2026-08-23 20:14")
++        );
++    }
++
+     #[test]
+     fn non_codex_single_limit_renders_combined_row() {
+         let now = Local::now();
+@@ -509,11 +557,13 @@ mod tests {
+             primary: Some(RateLimitWindowDisplay {
+                 used_percent: 20.0,
+                 resets_at: Some("soon".to_string()),
++                status_line_reset_at: Some("2026-08-23 20:14".to_string()),
+                 window_minutes: Some(60),
+             }),
+             secondary: Some(RateLimitWindowDisplay {
+                 used_percent: 40.0,
+                 resets_at: Some("later".to_string()),
++                status_line_reset_at: Some("2026-08-24 20:14".to_string()),
+                 window_minutes: Some(2 * 60),
+             }),
+             credits: None,
+diff --git a/codex-rs/tui/src/status/tests.rs b/codex-rs/tui/src/status/tests.rs
+index 8c75176aa3165fe78c53146b1d930f443d0c94d8..e8a6b16412236ad1e471865b832a9695b97e0691 100644
+--- a/codex-rs/tui/src/status/tests.rs
++++ b/codex-rs/tui/src/status/tests.rs
+@@ -70,6 +70,7 @@ fn stale_monthly_limit_marks_fresh_rolling_snapshot_stale() {
+         primary: Some(RateLimitWindowDisplay {
+             used_percent: 20.0,
+             resets_at: Some("soon".to_string()),
++            status_line_reset_at: Some("2026-08-23 20:14".to_string()),
+             window_minutes: Some(300),
+         }),
+         secondary: None,
+@@ -1803,11 +1804,13 @@ async fn transcript_overlay_remeasures_status_after_rate_limit_refresh() {
+             primary: Some(RateLimitWindowDisplay {
+                 used_percent: 45.0,
+                 resets_at: Some("soon".to_string()),
++                status_line_reset_at: Some("2026-08-23 20:14".to_string()),
+                 window_minutes: Some(300),
+             }),
+             secondary: Some(RateLimitWindowDisplay {
+                 used_percent: 30.0,
+                 resets_at: Some("later".to_string()),
++                status_line_reset_at: Some("2026-08-24 20:14".to_string()),
+                 window_minutes: Some(10_080),
+             }),
+             credits: None,

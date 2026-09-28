@@ -3,7 +3,7 @@ param(
     [ValidateSet('ko', 'en', 'ja')]
     [string]$Language = 'ko',
     [string]$StateRoot = (Join-Path $env:LOCALAPPDATA 'codex-usage-statusline'),
-    [string]$ReleaseTag = 'v0.4.0',
+    [string]$ReleaseTag = 'v0.5.0',
     [string]$ReleaseBaseUrl,
     [switch]$DryRun
 )
@@ -11,11 +11,11 @@ param(
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 $Utf8NoBom = New-Object System.Text.UTF8Encoding($false)
-$ProjectVersion = '0.4.0'
-$SupportedCodexVersion = '0.147.0'
+$ProjectVersion = '0.5.0'
+$SupportedCodexVersion = '0.156.1'
 $TargetTriple = 'x86_64-pc-windows-msvc'
-$ExpectedUpstreamCommit = 'be6e8eac029b183056b7e4402879f15d2c85f61b'
-$ExpectedPatchSha256 = '45427814a54f22fbaffadde1df8f2db4d7e2ac0aeae7f96ab440802bc0837dc8'
+$ExpectedUpstreamCommit = 'b412ff32c417f855c2b2d1581b77058eed87c84b'
+$ExpectedPatchSha256 = '776da60e15e42eb88a22936a8f16765548cd166bec2a5584162d1f72057c67ae'
 $Repository = 'alexsears/codex-usage-statusline'
 $StatusLineOverride = 'preserve-user-config'
 $ReleaseSigningPublicKeySha256 = 'c004c4a7baf1f3dedfcfca3346db7d93b37a148d0455b01a56fb5859f31488d0'
