@@ -1,0 +1,539 @@
+diff --git a/codex-rs/tui/src/bottom_pane/status_line_style.rs b/codex-rs/tui/src/bottom_pane/status_line_style.rs
+index 6ef9003c58..78b820b2bf 100644
+--- a/codex-rs/tui/src/bottom_pane/status_line_style.rs
++++ b/codex-rs/tui/src/bottom_pane/status_line_style.rs
+@@ -129,10 +129,12 @@ where
+         {
+             Style::default().fg(thread_color(thread_id))
+         } else if use_theme_colors {
+-            let accent = StatusLineAccent::for_item(item);
+-            soften_status_line_style(
+-                theme_style_for_accent(accent).unwrap_or_else(|| accent.fallback_style()),
+-            )
++            usage_status_style(item, &text).unwrap_or_else(|| {
++                let accent = StatusLineAccent::for_item(item);
++                soften_status_line_style(
++                    theme_style_for_accent(accent).unwrap_or_else(|| accent.fallback_style()),
++                )
++            })
+         } else {
+             secondary_text_style()
+         };
+@@ -159,6 +161,37 @@ where
+     (!spans.is_empty()).then(|| Line::from(spans))
+ }
+ 
++fn usage_status_style(item: StatusLineItem, text: &str) -> Option<Style> {
++    if !matches!(
++        item,
++        StatusLineItem::ContextUsed | StatusLineItem::FiveHourLimit | StatusLineItem::WeeklyLimit
++    ) {
++        return None;
++    }
++
++    let percent = text
++        .split_whitespace()
++        .find_map(|part| part.strip_suffix('%'))?
++        .parse::<f64>()
++        .ok()?;
++    let percent_used = if matches!(
++        item,
++        StatusLineItem::FiveHourLimit | StatusLineItem::WeeklyLimit
++    ) {
++        100.0 - percent
++    } else {
++        percent
++    };
++    let color = if percent_used >= 85.0 {
++        Color::Red
++    } else if percent_used >= 60.0 {
++        Color::Yellow
++    } else {
++        Color::Rgb(196, 181, 253)
++    };
++    Some(Style::default().fg(color))
++}
++
+ fn soften_status_line_style(mut style: Style) -> Style {
+     if let Some(fg) = style.fg {
+         style.fg = Some(soften_status_line_color(fg));
+@@ -267,7 +300,13 @@ mod tests {
+         assert_eq!(line.spans[0].style.fg, Some(Color::Red));
+         assert!(!line.spans[0].style.add_modifier.contains(Modifier::DIM));
+         assert_eq!(line.spans[1].style, secondary_text_style());
+-        assert_eq!(line.spans[2].style.fg, Some(Color::Green));
++        assert_eq!(
++            line.spans[2].style.fg,
++            Some(readable_color_on(
++                Color::Rgb(196, 181, 253),
++                /*background*/ None
++            ))
++        );
+         assert!(!line.spans[2].style.add_modifier.contains(Modifier::DIM));
+     }
+ 
+diff --git a/codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__status_line_model_with_reasoning_fast_footer.snap b/codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__status_line_model_with_reasoning_fast_footer.snap
+index 2ac794d2f0..4d736a1ec6 100644
+--- a/codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__status_line_model_with_reasoning_fast_footer.snap
++++ b/codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__status_line_model_with_reasoning_fast_footer.snap
+@@ -6,4 +6,4 @@ expression: normalized_backend_snapshot(terminal.backend())
+ "                                                                                "
+ "› Ask Codex to do anything                                                      "
+ "                                                                                "
+-"  gpt-5.4 xhigh fast · Context 0% used · /tmp/project                           "
++"  gpt-5.4 xhigh fast · 컨텍스트 ░░░░░░░░░░ 0% · /tmp/project                  " Hidden by multi-width symbols: [(24, " "), (26, " "), (28, " "), (30, " ")]
+diff --git a/codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__status_line_setup_popup_rate_limits.snap b/codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__status_line_setup_popup_rate_limits.snap
+index 6b6cd080bd..2e9a16621a 100644
+--- a/codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__status_line_setup_popup_rate_limits.snap
++++ b/codex-rs/tui/src/chatwidget/snapshots/codex_tui__chatwidget__tests__status_line_setup_popup_rate_limits.snap
+@@ -1,5 +1,6 @@
+ ---
+ source: tui/src/chatwidget/tests/status_surface_previews.rs
++assertion_line: 440
+ expression: status_line_popup_snapshot(&mut chat)
+ ---
+   Configure Status Line
+@@ -10,11 +11,11 @@ expression: status_line_popup_snapshot(&mut chat)
+ › [x] Use theme colors      Apply colors from the active /theme
+   ───────────────────────
+   [x] monthly-limit         Remaining usage on the monthly usage limit (omitted when unavailable)
+-  [x] weekly-limit          Remaining usage on the weekly usage limit (omitted when unavailable)
++  [x] weekly-limit          Remaining usage on the secondary usage limit (omitted when unavailable)
+   [ ] model                 Current model name
+   [ ] model-with-reasoning  Current model name with reasoning level
+   [ ] reasoning             Current reasoning level
+   [ ] current-dir           Current working directory
+ ↓
+-  monthly 65% left · weekly 50% left
++  monthly 65% left · 주 간  50% left
+   space toggle · ←/→ reorder · enter save · esc cancel
+diff --git a/codex-rs/tui/src/chatwidget/status_controls.rs b/codex-rs/tui/src/chatwidget/status_controls.rs
+index 692eba105a..a2b21d6a2a 100644
+--- a/codex-rs/tui/src/chatwidget/status_controls.rs
++++ b/codex-rs/tui/src/chatwidget/status_controls.rs
+@@ -451,7 +451,17 @@ impl ChatWidget {
+     ) -> Option<String> {
+         let window = window?;
+         let remaining = (100.0f64 - window.used_percent).clamp(0.0f64, 100.0f64);
+-        Some(format!("{label} {remaining:.0}% left"))
++        let reset = window
++            .status_line_reset_at
++            .as_deref()
++            .map(|resets_at| {
++                format!(
++                    " ({} {resets_at})",
++                    status_line_label(StatusLineLabel::Reset)
++                )
++            })
++            .unwrap_or_default();
++        Some(format!("{label} {remaining:.0}% left{reset}"))
+     }
+ 
+     pub(super) fn status_line_reasoning_effort_label(
+@@ -463,3 +473,42 @@ impl ChatWidget {
+         }
+     }
+ }
++
++pub(super) fn status_line_progress_bar(percent: f64) -> String {
++    const SEGMENTS: usize = 10;
++    let filled = ((percent.clamp(0.0, 100.0) / 100.0) * SEGMENTS as f64).round() as usize;
++    format!("{}{}", "█".repeat(filled), "░".repeat(SEGMENTS - filled))
++}
++
++#[derive(Clone, Copy, Debug, Eq, PartialEq)]
++pub(super) enum StatusLineLabel {
++    Context,
++    Usage,
++    Weekly,
++    Reset,
++}
++
++pub(super) fn status_line_label(label: StatusLineLabel) -> &'static str {
++    let language = std::env::var("CODEX_USAGE_STATUSLINE_LANGUAGE").ok();
++    status_line_label_for_language(language.as_deref(), label)
++}
++
++pub(super) fn status_line_label_for_language(
++    language: Option<&str>,
++    label: StatusLineLabel,
++) -> &'static str {
++    match (language, label) {
++        (Some("en"), StatusLineLabel::Context) => "Context",
++        (Some("en"), StatusLineLabel::Usage) => "Usage",
++        (Some("en"), StatusLineLabel::Weekly) => "Weekly",
++        (Some("en"), StatusLineLabel::Reset) => "resets",
++        (Some("ja"), StatusLineLabel::Context) => "コンテキスト",
++        (Some("ja"), StatusLineLabel::Usage) => "使用量",
++        (Some("ja"), StatusLineLabel::Weekly) => "週間",
++        (Some("ja"), StatusLineLabel::Reset) => "リセット",
++        (_, StatusLineLabel::Context) => "컨텍스트",
++        (_, StatusLineLabel::Usage) => "사용량",
++        (_, StatusLineLabel::Weekly) => "주간",
++        (_, StatusLineLabel::Reset) => "초기화",
++    }
++}
+diff --git a/codex-rs/tui/src/chatwidget/status_surfaces.rs b/codex-rs/tui/src/chatwidget/status_surfaces.rs
+index a3946abd13..73dd68c7d3 100644
+--- a/codex-rs/tui/src/chatwidget/status_surfaces.rs
++++ b/codex-rs/tui/src/chatwidget/status_surfaces.rs
+@@ -8,6 +8,9 @@ use crate::bottom_pane::status_line_from_segments;
+ use crate::branch_summary;
+ use crate::chatwidget::limit_label_for_window;
+ use crate::chatwidget::rate_limits::get_limits_duration;
++use crate::chatwidget::status_controls::StatusLineLabel;
++use crate::chatwidget::status_controls::status_line_label;
++use crate::chatwidget::status_controls::status_line_progress_bar;
+ use crate::legacy_core::config::Config;
+ use crate::model_catalog::LUNA_RESERVE_MODEL;
+ use crate::status::format_credit_micros;
+@@ -771,15 +774,23 @@ impl ChatWidget {
+             StatusLineItem::ContextRemaining => self
+                 .status_line_context_remaining_percent()
+                 .map(|remaining| format!("Context {remaining}% left")),
+-            StatusLineItem::ContextUsed => self
+-                .status_line_context_used_percent()
+-                .map(|used| format!("Context {used}% used")),
++            StatusLineItem::ContextUsed => self.status_line_context_used_percent().map(|used| {
++                format!(
++                    "{} {} {used}%",
++                    status_line_label(StatusLineLabel::Context),
++                    status_line_progress_bar(used as f64)
++                )
++            }),
+             StatusLineItem::FiveHourLimit => {
+                 let (window, is_secondary) = self
+                     .rate_limit_snapshots_by_limit_id
+                     .get("codex")
+                     .and_then(five_hour_status_window)?;
+-                let label = limit_label_for_window(window.window_minutes, is_secondary);
++                let label = if matches_window_label(window, "5h") {
++                    status_line_label(StatusLineLabel::Usage).to_string()
++                } else {
++                    limit_label_for_window(window.window_minutes, is_secondary)
++                };
+                 self.status_line_limit_display(Some(window), &label)
+             }
+             StatusLineItem::WeeklyLimit => {
+@@ -787,7 +798,11 @@ impl ChatWidget {
+                     .rate_limit_snapshots_by_limit_id
+                     .get("codex")
+                     .and_then(weekly_status_window)?;
+-                let label = limit_label_for_window(window.window_minutes, is_secondary);
++                let label = if matches_window_label(window, "weekly") {
++                    status_line_label(StatusLineLabel::Weekly).to_string()
++                } else {
++                    limit_label_for_window(window.window_minutes, is_secondary)
++                };
+                 self.status_line_limit_display(Some(window), &label)
+             }
+             StatusLineItem::CodexVersion => Some(CODEX_CLI_VERSION.to_string()),
+diff --git a/codex-rs/tui/src/chatwidget/tests/status_and_layout.rs b/codex-rs/tui/src/chatwidget/tests/status_and_layout.rs
+index 301b55c2cc..bb73b1c8b9 100644
+--- a/codex-rs/tui/src/chatwidget/tests/status_and_layout.rs
++++ b/codex-rs/tui/src/chatwidget/tests/status_and_layout.rs
+@@ -56,6 +56,49 @@ fn take_workspace_headline_request_id(
+     }
+ }
+ 
++#[test]
++fn status_line_progress_bar_clamps_and_rounds() {
++    use crate::chatwidget::status_controls::status_line_progress_bar;
++
++    assert_eq!(status_line_progress_bar(-1.0), "░░░░░░░░░░");
++    assert_eq!(status_line_progress_bar(4.9), "░░░░░░░░░░");
++    assert_eq!(status_line_progress_bar(5.0), "█░░░░░░░░░");
++    assert_eq!(status_line_progress_bar(49.0), "█████░░░░░");
++    assert_eq!(status_line_progress_bar(95.0), "██████████");
++    assert_eq!(status_line_progress_bar(101.0), "██████████");
++}
++
++#[test]
++fn status_line_labels_support_korean_english_and_japanese() {
++    use crate::chatwidget::status_controls::StatusLineLabel;
++    use crate::chatwidget::status_controls::status_line_label_for_language;
++
++    assert_eq!(
++        status_line_label_for_language(None, StatusLineLabel::Context),
++        "컨텍스트"
++    );
++    assert_eq!(
++        status_line_label_for_language(Some("en"), StatusLineLabel::Usage),
++        "Usage"
++    );
++    assert_eq!(
++        status_line_label_for_language(Some("en"), StatusLineLabel::Reset),
++        "resets"
++    );
++    assert_eq!(
++        status_line_label_for_language(Some("ja"), StatusLineLabel::Weekly),
++        "週間"
++    );
++    assert_eq!(
++        status_line_label_for_language(Some("ja"), StatusLineLabel::Reset),
++        "リセット"
++    );
++    assert_eq!(
++        status_line_label_for_language(Some("fr"), StatusLineLabel::Reset),
++        "초기화"
++    );
++}
++
+ /// Receiving a token usage update without usage clears the context indicator.
+ #[tokio::test]
+ async fn token_count_none_resets_context_indicator() {
+@@ -844,11 +887,51 @@ async fn status_line_legacy_limit_items_prefer_matching_windows() {
+ 
+     assert_eq!(
+         chat.status_line_value_for_item(crate::bottom_pane::StatusLineItem::FiveHourLimit),
+-        Some("5h 60% left".to_string())
++        Some("사용량 60% left".to_string())
+     );
+     assert_eq!(
+         chat.status_line_value_for_item(crate::bottom_pane::StatusLineItem::WeeklyLimit),
+-        Some("weekly 6% left".to_string())
++        Some("주간 6% left".to_string())
++    );
++}
++
++#[tokio::test]
++async fn status_line_weekly_limit_includes_exact_local_reset_timestamp() {
++    use crate::chatwidget::status_controls::StatusLineLabel;
++    use crate::chatwidget::status_controls::status_line_label;
++    use chrono::Local;
++    use chrono::TimeZone;
++
++    let (mut chat, _rx, _op_rx) = make_chatwidget_manual(/*model_override*/ None).await;
++    let reset_at = Local
++        .with_ymd_and_hms(2026, 8, 23, 20, 14, 0)
++        .single()
++        .expect("valid local timestamp");
++
++    chat.on_rate_limit_snapshot(Some(RateLimitSnapshot {
++        limit_id: None,
++        limit_name: None,
++        normal_model_slug: None,
++        primary: Some(RateLimitWindow {
++            used_percent: 49,
++            window_duration_mins: Some(7 * 24 * 60),
++            resets_at: Some(reset_at.timestamp()),
++        }),
++        secondary: None,
++        credits: None,
++        individual_limit: None,
++        plan_type: None,
++        spend_control_reached: None,
++        rate_limit_reached_type: None,
++    }));
++
++    assert_eq!(
++        chat.status_line_value_for_item(crate::bottom_pane::StatusLineItem::WeeklyLimit),
++        Some(format!(
++            "{} 51% left ({} 2026-08-23 20:14)",
++            status_line_label(StatusLineLabel::Weekly),
++            status_line_label(StatusLineLabel::Reset)
++        ))
+     );
+ }
+ 
+@@ -883,7 +966,7 @@ async fn status_line_shows_secondary_non_weekly_when_primary_is_weekly() {
+     );
+     assert_eq!(
+         chat.status_line_value_for_item(crate::bottom_pane::StatusLineItem::WeeklyLimit),
+-        Some("weekly 6% left".to_string())
++        Some("주간 6% left".to_string())
+     );
+ }
+ 
+@@ -914,7 +997,7 @@ async fn status_line_five_hour_item_omits_weekly_only_limit() {
+     );
+     assert_eq!(
+         chat.status_line_value_for_item(crate::bottom_pane::StatusLineItem::WeeklyLimit),
+-        Some("weekly 91% left".to_string())
++        Some("주간 91% left".to_string())
+     );
+ }
+ 
+@@ -2997,7 +3080,10 @@ async fn status_line_context_used_renders_labeled_percent() {
+ 
+     chat.refresh_status_line();
+ 
+-    assert_eq!(status_line_text(&chat), Some("Context 0% used".to_string()));
++    assert_eq!(
++        status_line_text(&chat),
++        Some("컨텍스트 ░░░░░░░░░░ 0%".to_string())
++    );
+     assert!(
+         drain_insert_history(&mut rx).is_empty(),
+         "context-used should remain a valid status line item"
+@@ -3030,7 +3116,10 @@ async fn status_line_legacy_context_usage_renders_context_used_percent() {
+ 
+     chat.refresh_status_line();
+ 
+-    assert_eq!(status_line_text(&chat), Some("Context 0% used".to_string()));
++    assert_eq!(
++        status_line_text(&chat),
++        Some("컨텍스트 ░░░░░░░░░░ 0%".to_string())
++    );
+     assert!(
+         drain_insert_history(&mut rx).is_empty(),
+         "legacy context-usage should remain a valid status line item"
+@@ -4058,7 +4147,9 @@ async fn status_line_model_with_reasoning_includes_fast_for_fast_capable_models(
+ 
+     assert_eq!(
+         status_line_text(&chat),
+-        Some(format!("gpt-5.4 xhigh fast · Context 0% used · {test_cwd}"))
++        Some(format!(
++            "gpt-5.4 xhigh fast · 컨텍스트 ░░░░░░░░░░ 0% · {test_cwd}"
++        ))
+     );
+ 
+     chat.set_model("gpt-5.2");
+@@ -4066,7 +4157,9 @@ async fn status_line_model_with_reasoning_includes_fast_for_fast_capable_models(
+ 
+     assert_eq!(
+         status_line_text(&chat),
+-        Some(format!("gpt-5.2 xhigh · Context 0% used · {test_cwd}"))
++        Some(format!(
++            "gpt-5.2 xhigh · 컨텍스트 ░░░░░░░░░░ 0% · {test_cwd}"
++        ))
+     );
+ }
+ 
+diff --git a/codex-rs/tui/src/status/rate_limits.rs b/codex-rs/tui/src/status/rate_limits.rs
+index c22868b621..45946177d8 100644
+--- a/codex-rs/tui/src/status/rate_limits.rs
++++ b/codex-rs/tui/src/status/rate_limits.rs
+@@ -72,6 +72,8 @@ pub(crate) struct RateLimitWindowDisplay {
+     pub used_percent: f64,
+     /// Human-readable local reset time.
+     pub resets_at: Option<String>,
++    /// Exact local reset date and time for space-constrained surfaces.
++    pub status_line_reset_at: Option<String>,
+     /// Window length in minutes when provided by the server.
+     pub window_minutes: Option<i64>,
+ }
+@@ -86,17 +88,23 @@ impl RateLimitWindowDisplay {
+             .resets_at
+             .and_then(|seconds| DateTime::<Utc>::from_timestamp(seconds, 0))
+             .map(|dt| dt.with_timezone(&Local));
++        let status_line_reset_at = resets_at_utc.as_ref().map(format_status_line_reset_at);
+         let resets_at =
+             resets_at_utc.map(|dt| format_reset_timestamp(dt, captured_at, clock_format));
+ 
+         Self {
+             used_percent: f64::from(window.used_percent),
+             resets_at,
++            status_line_reset_at,
+             window_minutes: window.window_duration_mins,
+         }
+     }
+ }
+ 
++fn format_status_line_reset_at(reset_at: &DateTime<Local>) -> String {
++    reset_at.format("%Y-%m-%d %H:%M").to_string()
++}
++
+ #[derive(Debug, Clone)]
+ pub(crate) struct RateLimitSnapshotDisplay {
+     /// Canonical limit identifier (for example: `codex` or `codex_other`).
+@@ -453,17 +461,59 @@ mod tests {
+     use super::RateLimitWindowDisplay;
+     use super::StatusRateLimitData;
+     use super::compose_rate_limit_data_many;
++    use super::format_status_line_reset_at;
+     use chrono::Local;
++    use chrono::TimeZone;
++    use codex_app_server_protocol::RateLimitWindow;
+     use pretty_assertions::assert_eq;
+ 
+     fn window(used_percent: f64) -> RateLimitWindowDisplay {
+         RateLimitWindowDisplay {
+             used_percent,
+             resets_at: Some("soon".to_string()),
++            status_line_reset_at: Some("2026-08-23 20:14".to_string()),
+             window_minutes: Some(300),
+         }
+     }
+ 
++    #[test]
++    fn status_line_reset_timestamp_has_local_date_and_time() {
++        let reset_at = Local
++            .with_ymd_and_hms(2026, 8, 23, 20, 14, 0)
++            .single()
++            .expect("valid local timestamp");
++
++        assert_eq!(format_status_line_reset_at(&reset_at), "2026-08-23 20:14");
++    }
++
++    #[test]
++    fn status_line_window_exposes_exact_local_reset_timestamp() {
++        let captured_at = Local
++            .with_ymd_and_hms(2026, 8, 16, 12, 0, 0)
++            .single()
++            .expect("valid local timestamp");
++        let reset_at = Local
++            .with_ymd_and_hms(2026, 8, 23, 20, 14, 0)
++            .single()
++            .expect("valid local timestamp");
++        let window = RateLimitWindow {
++            used_percent: 49,
++            window_duration_mins: Some(7 * 24 * 60),
++            resets_at: Some(reset_at.timestamp()),
++        };
++
++        let display = RateLimitWindowDisplay::from_window(
++            &window,
++            captured_at,
++            crate::clock_format::ClockFormat::TwentyFourHour,
++        );
++
++        assert_eq!(
++            display.status_line_reset_at.as_deref(),
++            Some("2026-08-23 20:14")
++        );
++    }
++
+     #[test]
+     fn non_codex_single_limit_renders_combined_row() {
+         let now = Local::now();
+@@ -522,11 +572,13 @@ mod tests {
+             primary: Some(RateLimitWindowDisplay {
+                 used_percent: 20.0,
+                 resets_at: Some("soon".to_string()),
++                status_line_reset_at: Some("2026-08-23 20:14".to_string()),
+                 window_minutes: Some(60),
+             }),
+             secondary: Some(RateLimitWindowDisplay {
+                 used_percent: 40.0,
+                 resets_at: Some("later".to_string()),
++                status_line_reset_at: Some("2026-08-24 20:14".to_string()),
+                 window_minutes: Some(2 * 60),
+             }),
+             credits: None,
+diff --git a/codex-rs/tui/src/status/tests.rs b/codex-rs/tui/src/status/tests.rs
+index d84b3d373f..a2bacb52f5 100644
+--- a/codex-rs/tui/src/status/tests.rs
++++ b/codex-rs/tui/src/status/tests.rs
+@@ -70,6 +70,7 @@ fn stale_monthly_limit_marks_fresh_rolling_snapshot_stale() {
+         primary: Some(RateLimitWindowDisplay {
+             used_percent: 20.0,
+             resets_at: Some("soon".to_string()),
++            status_line_reset_at: Some("2026-08-23 20:14".to_string()),
+             window_minutes: Some(300),
+         }),
+         secondary: None,
+@@ -1882,11 +1883,13 @@ async fn transcript_overlay_remeasures_status_after_rate_limit_refresh() {
+             primary: Some(RateLimitWindowDisplay {
+                 used_percent: 45.0,
+                 resets_at: Some("soon".to_string()),
++                status_line_reset_at: Some("2026-08-23 20:14".to_string()),
+                 window_minutes: Some(300),
+             }),
+             secondary: Some(RateLimitWindowDisplay {
+                 used_percent: 30.0,
+                 resets_at: Some("later".to_string()),
++                status_line_reset_at: Some("2026-08-24 20:14".to_string()),
+                 window_minutes: Some(10_080),
+             }),
+             credits: None,
